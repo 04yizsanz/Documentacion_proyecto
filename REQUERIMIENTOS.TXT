@@ -1,0 +1,9 @@
+Yizel
+Gestión de Usuarios	RF-01	Registro de Usuario			Yizel Sanchez
+	RF-02	Inicio de Sesión			Yizel Sanchez
+Gestión de Citas	RF-03	Agendar Cita			Yizel Sanchez
+	RF-04	Gestión de citas			Yizel Sanchez
+Gestión de Servicios	RF-05	Crear Servicio			Yizel Sanchez
+	RF-06	Gestionar servicios			Yizel Sanchez
+Facturación y Pagos	RF-07	Registrar Pago			Yizel Sanchez
+	RF-08	Gestionar comprobante			Yizel Sanchez
