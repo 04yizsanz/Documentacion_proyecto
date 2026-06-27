@@ -1,0 +1,938 @@
+<!doctype html>
+
+<html class="light" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Asha_spa</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              background: "#f7f9fb",
+              "on-tertiary": "#ffffff",
+              "on-tertiary-fixed": "#0b1c30",
+              "surface-variant": "#e0e3e5",
+              "on-background": "#191c1e",
+              "tertiary-fixed-dim": "#b7c8e1",
+              "surface-bright": "#f7f9fb",
+              "on-primary-fixed": "#3a0031",
+              "secondary-fixed-dim": "#dbc492",
+              "on-tertiary-container": "#2e3e53",
+              "error-container": "#ffdad6",
+              outline: "#85727d",
+              "tertiary-fixed": "#d3e4fe",
+              "secondary-fixed": "#f8e0ac",
+              "on-surface-variant": "#52424c",
+              "on-secondary-fixed": "#251a00",
+              "on-secondary-fixed-variant": "#54451e",
+              "on-error": "#ffffff",
+              "surface-dim": "#d8dadc",
+              "surface-container-low": "#f2f4f6",
+              "surface-tint": "#9b3586",
+              "inverse-surface": "#2d3133",
+              tertiary: "#505f76",
+              "inverse-on-surface": "#eff1f3",
+              "inverse-primary": "#ffade6",
+              "surface-container-highest": "#e0e3e5",
+              "primary-fixed-dim": "#ffade6",
+              "on-tertiary-fixed-variant": "#38485d",
+              "on-secondary": "#ffffff",
+              error: "#ba1a1a",
+              "tertiary-container": "#99a9c2",
+              "secondary-container": "#f5dda9",
+              "on-primary-fixed-variant": "#7e1a6c",
+              "on-primary-container": "#710b62",
+              surface: "#f7f9fb",
+              primary: "#9b3586",
+              "surface-container-high": "#e6e8ea",
+              "on-surface": "#191c1e",
+              "surface-container-lowest": "#ffffff",
+              "on-error-container": "#93000a",
+              "on-secondary-container": "#726137",
+              "surface-container": "#eceef0",
+              "primary-fixed": "#ffd7ef",
+              "primary-container": "#f280d5",
+              "on-primary": "#ffffff",
+              "outline-variant": "#d7c0cd",
+              secondary: "#6d5c33",
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            spacing: {
+              "stack-sm": "8px",
+              "stack-lg": "24px",
+              "container-max": "1440px",
+              gutter: "24px",
+              "stack-md": "16px",
+              "margin-page": "32px",
+              "sidebar-width": "280px",
+            },
+            fontFamily: {
+              "headline-md": ["Inter"],
+              "label-md": ["Inter"],
+              "headline-sm": ["Inter"],
+              "display-lg": ["Inter"],
+              "body-lg": ["Inter"],
+              "body-md": ["Inter"],
+              "table-data": ["Inter"],
+              headline: ["Inter"],
+              display: ["Inter"],
+              body: ["Inter"],
+              label: ["Inter"],
+            },
+            fontSize: {
+              "headline-md": [
+                "24px",
+                {
+                  lineHeight: "32px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-sm": [
+                "20px",
+                { lineHeight: "28px", fontWeight: "600" },
+              ],
+              "display-lg": [
+                "36px",
+                {
+                  lineHeight: "44px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+              "table-data": ["13px", { lineHeight: "18px", fontWeight: "400" }],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        background-color: #f7f9fb;
+        font-family: "Inter", sans-serif;
+        color: #191c1e;
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      .sidebar-active-tab {
+        background-color: #6cf8bb;
+        color: #00714d;
+        border-left: 4px solid #006c49;
+        font-weight: 700;
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #e0e3e5;
+        border-radius: 10px;
+      }
+      .glass-header {
+        backdrop-filter: blur(8px);
+        background-color: rgba(255, 255, 255, 0.8);
+      }
+    </style>
+  </head>
+  <body class="overflow-hidden">
+    <!-- SideNavBar -->
+    <aside
+      class="fixed left-0 top-0 h-full w-sidebar-width bg-surface-container flex flex-col py-stack-lg z-50 transition-all duration-150 ease-in-out border-r border-outline-variant"
+    >
+      <div class="px-6 mb-8">
+        <div class="flex items-center gap-3">
+          <div
+            class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-on-primary"
+          >
+            <span class="material-symbols-outlined"
+              >precision_manufacturing</span
+            >
+          </div>
+          <div>
+            <h1
+              class="font-headline-md text-headline-md font-black text-on-surface"
+            >
+              Precision ERP
+            </h1>
+            <p
+              class="font-label-md text-label-md text-on-surface-variant opacity-70"
+            >
+              Enterprise Suite
+            </p>
+          </div>
+        </div>
+      </div>
+      <nav class="flex-1 px-4 space-y-1 overflow-y-auto custom-scrollbar">
+        <a
+          class="text-on-surface-variant flex items-center px-4 py-3 rounded-lg hover:bg-surface-container-high hover:text-on-surface transition-colors"
+          href="panel-de-control.html"
+        >
+          <span class="material-symbols-outlined mr-3">dashboard</span>
+          <span class="font-label-md text-label-md">Panel de Control</span>
+        </a>
+        <a
+          class="text-on-surface-variant flex items-center px-4 py-3 rounded-lg hover:bg-surface-container-high hover:text-on-surface transition-colors"
+          href="gestion-inventario.html"
+        >
+          <span class="material-symbols-outlined mr-3">inventory_2</span>
+          <span class="font-label-md text-label-md">Inventario</span>
+        </a>
+        <a
+          class="text-on-surface-variant flex items-center px-4 py-3 rounded-lg hover:bg-surface-container-high hover:text-on-surface transition-colors"
+          href="gestion-reporte.html"
+        >
+          <span class="material-symbols-outlined mr-3">assessment</span>
+          <span class="font-label-md text-label-md">Reportes</span>
+        </a>
+        <a
+          class="text-on-surface-variant flex items-center px-4 py-3 rounded-lg hover:bg-surface-container-high hover:text-on-surface transition-colors"
+          href="gestion-proveedores.html"
+        >
+          <span class="material-symbols-outlined mr-3">local_shipping</span>
+          <span class="font-label-md text-label-md">Proveedores</span>
+        </a>
+        <a
+          class="sidebar-active-tab flex items-center px-4 py-3 rounded-r-lg transition-colors"
+          href="gestion-empleado.html"
+        >
+          <span class="material-symbols-outlined mr-3">badge</span>
+          <span class="font-label-md text-label-md">Empleados</span>
+        </a>
+      </nav>
+      <div class="px-4 mt-auto pt-6 border-t border-outline-variant">
+        <button
+          class="w-full bg-secondary text-on-secondary py-3 px-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:brightness-90 active:scale-95 transition-all mb-6"
+        >
+          <span class="material-symbols-outlined text-[20px]">person_add</span>
+          <span class="font-label-md text-label-md uppercase tracking-wider"
+            >New Entry</span
+          >
+        </button>
+        <div class="space-y-1">
+          <a
+            class="text-on-surface-variant flex items-center px-4 py-3 rounded-lg hover:bg-surface-container-high hover:text-on-surface transition-colors"
+            href="#"
+          >
+            <span class="material-symbols-outlined mr-3">settings</span>
+            <span class="font-label-md text-label-md">Configuración</span>
+          </a>
+          <a
+            class="text-on-surface-variant flex items-center px-4 py-3 rounded-lg hover:bg-surface-container-high hover:text-on-surface transition-colors"
+            href="#"
+          >
+            <span class="material-symbols-outlined mr-3 text-error"
+              >logout</span
+            >
+            <span class="font-label-md text-label-md">Cerrar sesión</span>
+          </a>
+        </div>
+      </div>
+    </aside>
+    <!-- Main Content Area -->
+    <main class="ml-sidebar-width min-h-screen flex flex-col">
+      <!-- TopNavBar -->
+      <header
+        class="h-16 bg-surface-container-lowest flex justify-between items-center px-gutter w-full sticky top-0 z-40 border-b border-outline-variant shadow-sm glass-header"
+      >
+        <div class="flex items-center gap-4 flex-1">
+          <div class="relative w-full max-w-md">
+            <span
+              class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant opacity-60"
+              >search</span
+            >
+            <input
+              class="w-full pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full focus:ring-2 focus:ring-primary/10 text-body-md font-body-md placeholder:text-on-surface-variant/50"
+              placeholder="Buscar empleados, roles o departamentos..."
+              type="text"
+            />
+          </div>
+        </div>
+        <div class="flex items-center gap-6">
+          <div class="flex items-center gap-2">
+            <button
+              class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors relative"
+            >
+              <span class="material-symbols-outlined">notifications</span>
+              <span
+                class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border border-surface-container-lowest"
+              ></span>
+            </button>
+            <button
+              class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors"
+            >
+              <span class="material-symbols-outlined">settings</span>
+            </button>
+          </div>
+          <div class="h-8 w-[1px] bg-outline-variant"></div>
+          <div class="flex items-center gap-3 cursor-pointer group">
+            <div class="text-right">
+              <p class="font-label-md text-label-md text-on-surface">
+                Admin User
+              </p>
+              <p
+                class="text-[10px] font-medium text-on-surface-variant opacity-70"
+              >
+                Súper Administrador
+              </p>
+            </div>
+            <img
+              class="w-10 h-10 rounded-full border-2 border-primary-container object-cover group-hover:border-secondary transition-colors"
+              data-alt="A professional headshot of a corporate administrator in a modern office environment, high-end commercial photography, soft key lighting, minimal grey background, wearing a charcoal blazer, looking confident and approachable, representative of a premium enterprise ERP user interface."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaLEHPuyFcCyUoVQwd-EO7SPljHsbVdSa3uqQFOp6xIkSiSrLdYxYuq_ZsEoCbG_VU5imlg9UpZQ3b0p5rEuJrRXnoe4kGIOpwdP8zjIuOkYsL4T_XUOv1N0-w71cHFmgmj2Wrfx65CvM2JWX3ivf2aUiz4O9F46uKbziNowbXxAyWciHj544fYsxGqav6RSEhjBI7pHA5_tqQLtuwpIFVs6FeXBzCiAKZQclAAEiKXf44zpGy73oGqpzsfmeu_7BGSgBJaeIQKaI"
+            />
+          </div>
+        </div>
+      </header>
+      <!-- Page Canvas -->
+      <div class="p-margin-page flex-1 overflow-y-auto custom-scrollbar">
+        <!-- Header Section -->
+        <div class="flex justify-between items-end mb-8">
+          <div>
+            <h2 class="font-display-lg text-display-lg text-primary">
+              Gestión de Empleados
+            </h2>
+            <p
+              class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mt-2"
+            >
+              Administra el talento humano de Precision ERP. Visualiza cargos,
+              departamentos y gestiona nuevas incorporaciones en un solo lugar.
+            </p>
+          </div>
+          <div class="flex gap-3">
+            <button
+              class="flex items-center gap-2 px-4 py-2.5 bg-surface-container-lowest border border-outline-variant rounded-lg font-label-md text-label-md text-on-surface hover:bg-surface-container-low transition-all active:scale-95 shadow-sm"
+            >
+              <span class="material-symbols-outlined text-[18px]"
+                >file_download</span
+              >
+              Exportar CSV
+            </button>
+            <button
+              class="flex items-center gap-2 px-6 py-2.5 bg-primary text-on-primary rounded-lg font-label-md text-label-md font-bold hover:brightness-125 transition-all active:scale-95 shadow-lg"
+              onclick="alert('Registro de empleado (RF-17)')"
+            >
+              <span class="material-symbols-outlined text-[18px]"
+                >add_circle</span
+              >
+              Registrar Empleado
+            </button>
+          </div>
+        </div>
+        <!-- Dashboard Stats Summary (Bento Lite) -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-stack-lg mb-8">
+          <div
+            class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant hover:shadow-md transition-shadow"
+          >
+            <div class="flex justify-between items-start mb-4">
+              <div class="p-2 bg-primary/5 text-primary rounded-lg">
+                <span class="material-symbols-outlined">groups</span>
+              </div>
+              <span class="text-secondary font-bold text-[12px]"
+                >+4% mes anterior</span
+              >
+            </div>
+            <p
+              class="text-on-surface-variant font-label-md text-label-md uppercase tracking-widest"
+            >
+              Total Empleados
+            </p>
+            <p class="text-headline-md font-headline-md mt-1">1,248</p>
+          </div>
+          <div
+            class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant hover:shadow-md transition-shadow"
+          >
+            <div class="flex justify-between items-start mb-4">
+              <div class="p-2 bg-secondary/5 text-secondary rounded-lg">
+                <span class="material-symbols-outlined">work_outline</span>
+              </div>
+              <span
+                class="text-on-surface-variant opacity-60 font-medium text-[12px]"
+                >8 Departamentos</span
+              >
+            </div>
+            <p
+              class="text-on-surface-variant font-label-md text-label-md uppercase tracking-widest"
+            >
+              Nuevas Bajas
+            </p>
+            <p class="text-headline-md font-headline-md mt-1">12</p>
+          </div>
+          <div
+            class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant hover:shadow-md transition-shadow"
+          >
+            <div class="flex justify-between items-start mb-4">
+              <div
+                class="p-2 bg-tertiary-fixed/10 text-tertiary-fixed-dim rounded-lg"
+              >
+                <span
+                  class="material-symbols-outlined text-tertiary-fixed-variant"
+                  style="color: #574425"
+                  >event_available</span
+                >
+              </div>
+              <span class="text-secondary font-bold text-[12px]"
+                >98% asistencia</span
+              >
+            </div>
+            <p
+              class="text-on-surface-variant font-label-md text-label-md uppercase tracking-widest"
+            >
+              Onboarding
+            </p>
+            <p class="text-headline-md font-headline-md mt-1">24</p>
+          </div>
+          <div
+            class="bg-primary text-on-primary p-6 rounded-xl shadow-xl border border-primary/20 flex flex-col justify-between overflow-hidden relative group"
+          >
+            <div class="relative z-10">
+              <p
+                class="font-label-md text-label-md uppercase tracking-widest opacity-80"
+              >
+                Meta Mensual de Contratación
+              </p>
+              <p class="text-display-lg text-[28px] font-bold mt-2">85%</p>
+            </div>
+            <div
+              class="w-full bg-white/20 h-1.5 rounded-full mt-4 relative z-10"
+            >
+              <div
+                class="bg-secondary-container h-full rounded-full"
+                style="width: 85%"
+              ></div>
+            </div>
+            <div
+              class="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform"
+            >
+              <span class="material-symbols-outlined text-[120px]"
+                >trending_up</span
+              >
+            </div>
+          </div>
+        </div>
+        <!-- Employee Directory Table Container (RF-18) -->
+        <div
+          class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm overflow-hidden flex flex-col"
+        >
+          <!-- Filters & Search Inner Bar -->
+          <div
+            class="px-6 py-4 border-b border-outline-variant bg-surface-container-low/30 flex flex-wrap items-center justify-between gap-4"
+          >
+            <div class="flex items-center gap-4">
+              <div
+                class="flex items-center gap-2 border border-outline-variant px-3 py-1.5 rounded-lg bg-surface-container-lowest"
+              >
+                <span
+                  class="material-symbols-outlined text-on-surface-variant text-[20px]"
+                  >filter_list</span
+                >
+                <span class="font-label-md text-label-md">Filtros</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <select
+                  class="bg-transparent border-none font-label-md text-label-md text-on-surface-variant focus:ring-0 cursor-pointer"
+                >
+                  <option>Todos los Departamentos</option>
+                  <option>Ingeniería</option>
+                  <option>Diseño</option>
+                  <option>Marketing</option>
+                  <option>RRHH</option>
+                </select>
+              </div>
+            </div>
+            <div
+              class="flex items-center gap-2 text-on-surface-variant font-label-md text-label-md"
+            >
+              <span>Mostrando 1-10 de 1,248 empleados</span>
+            </div>
+          </div>
+          <!-- Table -->
+          <div class="overflow-x-auto">
+            <table class="w-full text-left">
+              <thead>
+                <tr
+                  class="border-b border-outline-variant bg-surface-container-lowest"
+                >
+                  <th
+                    class="px-6 py-4 font-label-md text-label-md uppercase tracking-wider text-on-surface-variant"
+                  >
+                    Empleado
+                  </th>
+                  <th
+                    class="px-6 py-4 font-label-md text-label-md uppercase tracking-wider text-on-surface-variant"
+                  >
+                    ID / Cargo
+                  </th>
+                  <th
+                    class="px-6 py-4 font-label-md text-label-md uppercase tracking-wider text-on-surface-variant"
+                  >
+                    Departamento
+                  </th>
+                  <th
+                    class="px-6 py-4 font-label-md text-label-md uppercase tracking-wider text-on-surface-variant"
+                  >
+                    Fecha Ingreso
+                  </th>
+                  <th
+                    class="px-6 py-4 font-label-md text-label-md uppercase tracking-wider text-on-surface-variant"
+                  >
+                    Estado
+                  </th>
+                  <th class="px-6 py-4"></th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-outline-variant">
+                <!-- Row 1 -->
+                <tr
+                  class="hover:bg-surface-container-low/50 transition-colors group"
+                >
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-3">
+                      <img
+                        class="w-10 h-10 rounded-full object-cover"
+                        data-alt="Close-up portrait of a young professional woman with glasses, smiling warmly, clean high-key studio lighting, modern minimalist business attire, soft blurred background, high resolution corporate photography for employee profile."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3Xl8QKQ8M9p64n1ULslu_p4FlJurNU3YpTAjYDn6mBpp0_5DIIcaqVU5nkUgzAkYAL2QtRmLqfFsSabW10uMF2EwTGVjy2qY2_zQPbnPnUFhBXZQ-EoGadAtn52qUXwlWS4hMPIrpRHghy4U8WTxNH_a1DMsBr4IjZx9jm0702_f3AdKlm91TzB6IL9TMQ3TR5kqKDbJ4aaxJvnAZGLXvJw7EzKFzYOFo0A4vOLw--slGSwuqUin_AUobt2qNNBEOxB5B5lXSNA0"
+                      />
+                      <div>
+                        <p class="font-bold text-on-surface text-body-md">
+                          Elena Rodriguez
+                        </p>
+                        <p
+                          class="text-on-surface-variant opacity-60 text-[12px]"
+                        >
+                          elena.rodriguez@precision.com
+                        </p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4">
+                    <p class="font-medium text-on-surface text-body-md">
+                      Senior UX Designer
+                    </p>
+                    <p class="text-on-surface-variant opacity-60 text-[12px]">
+                      ID: EMP-9021
+                    </p>
+                  </td>
+                  <td class="px-6 py-4">
+                    <span
+                      class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-container text-on-primary-container"
+                    >
+                      Diseño de Producto
+                    </span>
+                  </td>
+                  <td
+                    class="px-6 py-4 font-table-data text-table-data text-on-surface-variant"
+                  >
+                    15 Mar, 2021
+                  </td>
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-2">
+                      <div class="w-2 h-2 bg-secondary rounded-full"></div>
+                      <span
+                        class="font-label-md text-[11px] text-secondary font-bold uppercase"
+                        >Activo</span
+                      >
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 text-right">
+                    <div
+                      class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                      <button
+                        class="p-1.5 hover:bg-surface-container-high rounded text-on-surface-variant"
+                        title="Editar"
+                      >
+                        <span class="material-symbols-outlined text-[18px]"
+                          >edit</span
+                        >
+                      </button>
+                      <button
+                        class="p-1.5 hover:bg-surface-container-high rounded text-on-surface-variant"
+                        title="Ver perfil"
+                      >
+                        <span class="material-symbols-outlined text-[18px]"
+                          >visibility</span
+                        >
+                      </button>
+                      <button
+                        class="p-1.5 hover:bg-surface-container-high rounded text-error"
+                        title="Dar de baja"
+                      >
+                        <span class="material-symbols-outlined text-[18px]"
+                          >person_off</span
+                        >
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Row 2 -->
+                <tr
+                  class="hover:bg-surface-container-low/50 transition-colors group"
+                >
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-3">
+                      <img
+                        class="w-10 h-10 rounded-full object-cover"
+                        data-alt="A medium shot of a mature male executive in a sleek navy suit, neutral grey background, high-end professional lighting, subtle shadows, clean corporate look, focused and reliable expression, part of a consistent set of employee portraits."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAj_Z1b3LuIQ3trFHTNWgo_X1pIUrm-4JXB_fi5YxDiGDQi-kOmrXIeGoUxqEhLWvOVW-pfP0DN4-ATE3EWOpyjIQu1Gx2EKHo197hnqcUjsEtstnQvmRpgDwrjg-Wb7xQpeLqe-o-7jBLZM0OuRxBJ94VHLFlsnNgeF2PlCRp8zdKneBircyB0L3x_y667Tad9I4BCYondb77JwXIvF_y09W0zUyoskU4J-ii7FgVKnhlJ4t8iG-lBapX5hXHFUr5dFDP1L87yh1M"
+                      />
+                      <div>
+                        <p class="font-bold text-on-surface text-body-md">
+                          Carlos Mendoza
+                        </p>
+                        <p
+                          class="text-on-surface-variant opacity-60 text-[12px]"
+                        >
+                          carlos.m@precision.com
+                        </p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4">
+                    <p class="font-medium text-on-surface text-body-md">
+                      Backend Architecture
+                    </p>
+                    <p class="text-on-surface-variant opacity-60 text-[12px]">
+                      ID: EMP-4452
+                    </p>
+                  </td>
+                  <td class="px-6 py-4">
+                    <span
+                      class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary-container text-on-secondary-container"
+                    >
+                      Ingeniería
+                    </span>
+                  </td>
+                  <td
+                    class="px-6 py-4 font-table-data text-table-data text-on-surface-variant"
+                  >
+                    02 Ene, 2019
+                  </td>
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-2">
+                      <div class="w-2 h-2 bg-secondary rounded-full"></div>
+                      <span
+                        class="font-label-md text-[11px] text-secondary font-bold uppercase"
+                        >Activo</span
+                      >
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 text-right">
+                    <div
+                      class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                      <button
+                        class="p-1.5 hover:bg-surface-container-high rounded text-on-surface-variant"
+                      >
+                        <span class="material-symbols-outlined text-[18px]"
+                          >edit</span
+                        >
+                      </button>
+                      <button
+                        class="p-1.5 hover:bg-surface-container-high rounded text-on-surface-variant"
+                      >
+                        <span class="material-symbols-outlined text-[18px]"
+                          >visibility</span
+                        >
+                      </button>
+                      <button
+                        class="p-1.5 hover:bg-surface-container-high rounded text-error"
+                      >
+                        <span class="material-symbols-outlined text-[18px]"
+                          >person_off</span
+                        >
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Row 3 -->
+                <tr
+                  class="hover:bg-surface-container-low/50 transition-colors group"
+                >
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-3">
+                      <img
+                        class="w-10 h-10 rounded-full object-cover"
+                        data-alt="Professional headshot of a creative professional male with a neat beard, wearing a stylish turtleneck, artistic studio lighting with soft teal rim light, neutral background, looking at camera with creative focus, representative of a high-tech modern workforce."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxiZpkkE1uwOzvrkonLyOQP8qRp8bOBtx-kX604RsKjhRvpK4ceRG1VVxYDfa_wESwSHCH2R-0yYcpehy59gY8IrN-TgCQ0y1fAQQNByAUEDf8cHES7MUGSVYLEYJRkO724dAiPMvt075sidUHHCBvAZlU2-3ocA3crT9yYrljeMJ-nzCbJOikl5eryF6ZfEcxHg8TuXsBMROjTqusOqitGqjcp_ZB53RFnmwa752IjW4Lwe2FNHqO3mMUGW_nGnk_zApt8zVsuCE"
+                      />
+                      <div>
+                        <p class="font-bold text-on-surface text-body-md">
+                          Lucas Silva
+                        </p>
+                        <p
+                          class="text-on-surface-variant opacity-60 text-[12px]"
+                        >
+                          l.silva@precision.com
+                        </p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4">
+                    <p class="font-medium text-on-surface text-body-md">
+                      Marketing Manager
+                    </p>
+                    <p class="text-on-surface-variant opacity-60 text-[12px]">
+                      ID: EMP-1120
+                    </p>
+                  </td>
+                  <td class="px-6 py-4">
+                    <span
+                      class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-tertiary-fixed text-on-tertiary-fixed-variant"
+                    >
+                      Ventas &amp; Marketing
+                    </span>
+                  </td>
+                  <td
+                    class="px-6 py-4 font-table-data text-table-data text-on-surface-variant"
+                  >
+                    22 Sep, 2022
+                  </td>
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-2">
+                      <div
+                        class="w-2 h-2 bg-tertiary-fixed-dim rounded-full"
+                      ></div>
+                      <span
+                        class="font-label-md text-[11px] text-on-tertiary-fixed-variant font-bold uppercase"
+                        >En Onboarding</span
+                      >
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 text-right">
+                    <div
+                      class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                      <button
+                        class="p-1.5 hover:bg-surface-container-high rounded text-on-surface-variant"
+                      >
+                        <span class="material-symbols-outlined text-[18px]"
+                          >edit</span
+                        >
+                      </button>
+                      <button
+                        class="p-1.5 hover:bg-surface-container-high rounded text-on-surface-variant"
+                      >
+                        <span class="material-symbols-outlined text-[18px]"
+                          >visibility</span
+                        >
+                      </button>
+                      <button
+                        class="p-1.5 hover:bg-surface-container-high rounded text-error"
+                      >
+                        <span class="material-symbols-outlined text-[18px]"
+                          >person_off</span
+                        >
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Row 4 -->
+                <tr
+                  class="hover:bg-surface-container-low/50 transition-colors group"
+                >
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-3">
+                      <img
+                        class="w-10 h-10 rounded-full object-cover"
+                        data-alt="Portrait of a diverse female executive in business professional attire, confident posture, bright modern office setting in the background with soft bokeh, high-end photography, cinematic depth of field, sharp focus on subject, elite corporate aesthetic."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCy-Skw9Su9WMY9lYIa60iQhcv2LIjx1PkRkF-u3wWqBMFHBNlalAqkNAJg_J3XMj4DlmAAk8RvQ2ItN0QWBrv5jX2es4nB9blNUiQjVWFRQcaEy8NSYRDbKgcLCkN9-g3gOfChqhyRm2XW8RX8Oy-KtRQw9FD3N1iH8VhVj6DUCf4Gr456aUShyjKPDyTWKfRvcqEZb43bdU6XrttTwrZ7MxeVgHmLoaMtBBVE08kwowpwKkjIsM-FUUYkPiDxHtFGCr1Ym7xJ7hs"
+                      />
+                      <div>
+                        <p class="font-bold text-on-surface text-body-md">
+                          Marta Ortega
+                        </p>
+                        <p
+                          class="text-on-surface-variant opacity-60 text-[12px]"
+                        >
+                          marta.o@precision.com
+                        </p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4">
+                    <p class="font-medium text-on-surface text-body-md">
+                      Chief Talent Officer
+                    </p>
+                    <p class="text-on-surface-variant opacity-60 text-[12px]">
+                      ID: EMP-0004
+                    </p>
+                  </td>
+                  <td class="px-6 py-4">
+                    <span
+                      class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-surface-variant text-on-surface-variant"
+                    >
+                      Recursos Humanos
+                    </span>
+                  </td>
+                  <td
+                    class="px-6 py-4 font-table-data text-table-data text-on-surface-variant"
+                  >
+                    12 Jun, 2018
+                  </td>
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-2">
+                      <div class="w-2 h-2 bg-secondary rounded-full"></div>
+                      <span
+                        class="font-label-md text-[11px] text-secondary font-bold uppercase"
+                        >Activo</span
+                      >
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 text-right">
+                    <div
+                      class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                      <button
+                        class="p-1.5 hover:bg-surface-container-high rounded text-on-surface-variant"
+                      >
+                        <span class="material-symbols-outlined text-[18px]"
+                          >edit</span
+                        >
+                      </button>
+                      <button
+                        class="p-1.5 hover:bg-surface-container-high rounded text-on-surface-variant"
+                      >
+                        <span class="material-symbols-outlined text-[18px]"
+                          >visibility</span
+                        >
+                      </button>
+                      <button
+                        class="p-1.5 hover:bg-surface-container-high rounded text-error"
+                      >
+                        <span class="material-symbols-outlined text-[18px]"
+                          >person_off</span
+                        >
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- Pagination -->
+          <div
+            class="px-6 py-4 border-t border-outline-variant bg-surface-container-low/20 flex items-center justify-between"
+          >
+            <button
+              class="px-4 py-2 border border-outline-variant rounded-lg text-label-md font-label-md text-on-surface-variant hover:bg-surface-container-low transition-colors disabled:opacity-40"
+              disabled=""
+            >
+              Anterior
+            </button>
+            <div class="flex items-center gap-1">
+              <button
+                class="w-8 h-8 rounded-lg bg-primary text-on-primary font-bold text-xs"
+              >
+                1
+              </button>
+              <button
+                class="w-8 h-8 rounded-lg hover:bg-surface-container-low text-on-surface-variant text-xs"
+              >
+                2
+              </button>
+              <button
+                class="w-8 h-8 rounded-lg hover:bg-surface-container-low text-on-surface-variant text-xs"
+              >
+                3
+              </button>
+              <span class="px-1 text-on-surface-variant">...</span>
+              <button
+                class="w-8 h-8 rounded-lg hover:bg-surface-container-low text-on-surface-variant text-xs"
+              >
+                125
+              </button>
+            </div>
+            <button
+              class="px-4 py-2 border border-outline-variant rounded-lg text-label-md font-label-md text-on-surface-variant hover:bg-surface-container-low transition-colors"
+            >
+              Siguiente
+            </button>
+          </div>
+        </div>
+        <!-- Footer Meta -->
+        <div
+          class="mt-8 flex justify-between items-center text-on-surface-variant opacity-50 font-label-md text-[11px]"
+        >
+          <p>© 2024 Precision ERP - Sistema de Gestión Empresarial</p>
+          <div class="flex gap-4">
+            <a class="hover:underline" href="#">Políticas de Privacidad</a>
+            <a class="hover:underline" href="#">Soporte Técnico</a>
+            <span>v2.4.0-stable</span>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Floating Action Button (Task Specific Context) -->
+    <button
+      class="fixed bottom-8 right-8 w-14 h-14 bg-secondary text-on-secondary rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all group z-50"
+      onclick="alert('Desplegar formulario rápido de registro')"
+    >
+      <span
+        class="material-symbols-outlined text-[32px] group-hover:rotate-90 transition-transform"
+        >add</span
+      >
+    </button>
+    <script>
+      // Simple search interactivity
+      const searchInput = document.querySelector(
+        'input[placeholder*="Buscar empleados"]',
+      );
+      searchInput.addEventListener("input", (e) => {
+        console.log("Filtrando directorio por:", e.target.value);
+        // In a real scenario, this would filter the table rows
+      });
+
+      // Tonal layering micro-interaction for cards
+      const statsCards = document.querySelectorAll(
+        ".bg-surface-container-lowest",
+      );
+      statsCards.forEach((card) => {
+        card.addEventListener("mouseenter", () => {
+          card.style.transform = "translateY(-4px)";
+        });
+        card.addEventListener("mouseleave", () => {
+          card.style.transform = "translateY(0px)";
+        });
+        card.style.transition = "transform 0.3s ease";
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,506 @@
+<!doctype html>
+
+<html class="light" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Asha_spa</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              background: "#f7f9fb",
+              "on-tertiary": "#ffffff",
+              "on-tertiary-fixed": "#0b1c30",
+              "surface-variant": "#e0e3e5",
+              "on-background": "#191c1e",
+              "tertiary-fixed-dim": "#b7c8e1",
+              "surface-bright": "#f7f9fb",
+              "on-primary-fixed": "#3a0031",
+              "secondary-fixed-dim": "#dbc492",
+              "on-tertiary-container": "#2e3e53",
+              "error-container": "#ffdad6",
+              outline: "#85727d",
+              "tertiary-fixed": "#d3e4fe",
+              "secondary-fixed": "#f8e0ac",
+              "on-surface-variant": "#52424c",
+              "on-secondary-fixed": "#251a00",
+              "on-secondary-fixed-variant": "#54451e",
+              "on-error": "#ffffff",
+              "surface-dim": "#d8dadc",
+              "surface-container-low": "#f2f4f6",
+              "surface-tint": "#9b3586",
+              "inverse-surface": "#2d3133",
+              tertiary: "#505f76",
+              "inverse-on-surface": "#eff1f3",
+              "inverse-primary": "#ffade6",
+              "surface-container-highest": "#e0e3e5",
+              "primary-fixed-dim": "#ffade6",
+              "on-tertiary-fixed-variant": "#38485d",
+              "on-secondary": "#ffffff",
+              error: "#ba1a1a",
+              "tertiary-container": "#99a9c2",
+              "secondary-container": "#f5dda9",
+              "on-primary-fixed-variant": "#7e1a6c",
+              "on-primary-container": "#710b62",
+              surface: "#f7f9fb",
+              primary: "#9b3586",
+              "surface-container-high": "#e6e8ea",
+              "on-surface": "#191c1e",
+              "surface-container-lowest": "#ffffff",
+              "on-error-container": "#93000a",
+              "on-secondary-container": "#726137",
+              "surface-container": "#eceef0",
+              "primary-fixed": "#ffd7ef",
+              "primary-container": "#f280d5",
+              "on-primary": "#ffffff",
+              "outline-variant": "#d7c0cd",
+              secondary: "#6d5c33",
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            spacing: {
+              "stack-sm": "8px",
+              "stack-lg": "24px",
+              "container-max": "1440px",
+              gutter: "24px",
+              "stack-md": "16px",
+              "margin-page": "32px",
+              "sidebar-width": "280px",
+            },
+            fontFamily: {
+              "headline-md": ["Inter"],
+              "label-md": ["Inter"],
+              "headline-sm": ["Inter"],
+              "display-lg": ["Inter"],
+              "body-lg": ["Inter"],
+              "body-md": ["Inter"],
+              "table-data": ["Inter"],
+              headline: ["Inter"],
+              display: ["Inter"],
+              body: ["Inter"],
+              label: ["Inter"],
+            },
+            fontSize: {
+              "headline-md": [
+                "24px",
+                {
+                  lineHeight: "32px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-sm": [
+                "20px",
+                { lineHeight: "28px", fontWeight: "600" },
+              ],
+              "display-lg": [
+                "36px",
+                {
+                  lineHeight: "44px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+              "table-data": ["13px", { lineHeight: "18px", fontWeight: "400" }],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      .sidebar-active {
+        background-color: #6cf8bb; /* secondary-container */
+        color: #00714d; /* on-secondary-container */
+        border-left: 4px solid #006c49; /* secondary */
+        font-weight: 700;
+      }
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+      .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    </style>
+  </head>
+  <body class="bg-background text-on-background min-h-screen">
+    <!-- SideNavBar Component -->
+    <aside
+      class="fixed left-0 top-0 h-full w-[280px] bg-surface-container flex flex-col py-stack-lg z-50 transition-all duration-150 ease-in-out"
+    >
+      <div class="px-6 mb-10">
+        <div class="flex items-center gap-3">
+          <div
+            class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center overflow-hidden"
+          >
+            <img
+              class="w-8 h-8 object-contain"
+              data-alt="A professional minimalist company logo for a high-end enterprise ERP software. The logo is a geometric abstract shape representing precision and interconnected data, rendered in crisp white against a deep charcoal background. The style is modern, corporate, and clean, suitable for a sophisticated business environment."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_52Moj6hiG7elNgIOMHruCdNxfZEcKncSaa10VXaGNYooEqcn3Qosii8zRSfNN63lQLiwLMdy8Gq1Hmosfn28XMa8mEL1pa1GidStDyqO-ZH4ixHLeoGDNIvPo0hUgNl17I3pKIdvMr0HNwfOtrISJ37SnwSNlw-XzhRzGcjmZV8QX91MAj7uZzfRB-37n947eJGkGk01vXbNP5htTKZ38FuvgJp0Oo5j7xv_X698UOifhlkzJ1ukoJ8s8619Uxjq06iIYbXvlug"
+            />
+          </div>
+          <div>
+            <h1
+              class="font-headline-md text-headline-md font-black text-on-surface leading-none"
+            >
+              Precision ERP
+            </h1>
+            <p
+              class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold mt-1"
+            >
+              Enterprise Suite
+            </p>
+          </div>
+        </div>
+      </div>
+      <nav class="flex-1 space-y-1 px-2 overflow-y-auto scrollbar-hide">
+        <a
+          class="text-on-surface-variant flex items-center px-4 py-3 hover:bg-surface-container-high hover:text-on-surface transition-all duration-150 rounded-r-full mr-2"
+          href="p"
+        >
+          <span class="material-symbols-outlined mr-3">dashboard</span>
+          <span class="font-label-md text-label-md">Panel de Control</span>
+        </a>
+        <a
+          class="text-on-surface-variant flex items-center px-4 py-3 hover:bg-surface-container-high hover:text-on-surface transition-all duration-150 rounded-r-full mr-2"
+          href="gestion-inventario.html"
+        >
+          <span class="material-symbols-outlined mr-3">inventory_2</span>
+          <span class="font-label-md text-label-md">Inventario</span>
+        </a>
+        <a
+          class="text-on-surface-variant flex items-center px-4 py-3 hover:bg-surface-container-high hover:text-on-surface transition-all duration-150 rounded-r-full mr-2"
+          href="gestion-reporte.html"
+        >
+          <span class="material-symbols-outlined mr-3">assessment</span>
+          <span class="font-label-md text-label-md">Reportes</span>
+        </a>
+        <a
+          class="sidebar-active flex items-center px-4 py-3 transition-all duration-150 rounded-r-full mr-2"
+          href="gestion-proveedores.html"
+        >
+          <span class="material-symbols-outlined mr-3">local_shipping</span>
+          <span class="font-label-md text-label-md">Proveedores</span>
+        </a>
+        <a
+          class="text-on-surface-variant flex items-center px-4 py-3 hover:bg-surface-container-high hover:text-on-surface transition-all duration-150 rounded-r-full mr-2"
+          href="gestion-empleado.html"
+        >
+          <span class="material-symbols-outlined mr-3">badge</span>
+          <span class="font-label-md text-label-md">Empleados</span>
+        </a>
+      </nav>
+      <div class="mt-auto px-2 pt-6 border-t border-outline-variant/30">
+        <a
+          class="text-on-surface-variant flex items-center px-4 py-3 hover:bg-surface-container-high hover:text-on-surface transition-all duration-150 rounded-r-full mr-2"
+          href="#"
+        >
+          <span class="material-symbols-outlined mr-3">settings</span>
+          <span class="font-label-md text-label-md">Configuración</span>
+        </a>
+        <a
+          class="text-on-surface-variant flex items-center px-4 py-3 hover:bg-surface-container-high hover:text-on-surface transition-all duration-150 rounded-r-full mr-2"
+          href="#"
+        >
+          <span class="material-symbols-outlined mr-3">logout</span>
+          <span class="font-label-md text-label-md">Cerrar sesión</span>
+        </a>
+      </div>
+    </aside>
+    <!-- TopNavBar Component -->
+    <header
+      class="fixed top-0 left-[280px] right-0 h-16 bg-surface-container-lowest shadow-sm border-b border-outline-variant flex justify-between items-center px-gutter z-40"
+    >
+      <div class="flex items-center flex-1">
+        <div class="relative w-full max-w-md">
+          <span
+            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]"
+            >search</span
+          >
+          <input
+            class="w-full pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-lg focus:ring-2 focus:ring-secondary/50 font-body-md text-body-md text-on-surface"
+            placeholder="Buscar proveedores, categorías..."
+            type="text"
+          />
+        </div>
+      </div>
+      <div class="flex items-center gap-4">
+        <button
+          class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-low transition-colors cursor-pointer active:scale-95"
+        >
+          <span class="material-symbols-outlined">notifications</span>
+        </button>
+        <button
+          class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-low transition-colors cursor-pointer active:scale-95"
+        >
+          <span class="material-symbols-outlined">settings</span>
+        </button>
+        <div class="h-8 w-px bg-outline-variant mx-2"></div>
+        <div class="flex items-center gap-3 cursor-pointer group">
+          <div class="text-right">
+            <p
+              class="font-label-md text-label-md text-on-surface leading-tight"
+            >
+              Admin User
+            </p>
+            <p class="text-[10px] text-on-surface-variant">Operations Dept</p>
+          </div>
+          <img
+            class="w-10 h-10 rounded-full border border-outline-variant object-cover"
+            data-alt="A high-quality studio portrait of a professional male manager in his late 30s. He is wearing a minimalist dark navy sweater. The background is a soft, out-of-focus modern office environment with neutral tones and soft daylight. The aesthetic is clean, sharp, and corporate, emphasizing trust and competence."
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8yovON_5aTF9qkfleDmoj0mJ3djZO-F4leG5jV0TSLb58urd2W1Q7dfjW9FVTza0s4guirLBq6cw0d5tsiwHIfPRyoNIK_W9h83k_25SMJRBraBjgCy997kUuG2WzkH9QotC0R7Xwby_8WrepZAohaNHlLR9SC-g1TEHSJwIm9x_yoaSxUrEvbRtrx_FtMW3wT3u4Jj2ZOp4FpXB9o493harvukWxz95L6xRO_zuYtHYh5rxVLyiulKo72SDZ5St_EkeGsFOqat4"
+          />
+        </div>
+      </div>
+    </header>
+    <!-- Main Content Area -->
+    <main class="ml-[280px] pt-16 p-margin-page max-w-container-max mx-auto">
+      <!-- Header Section -->
+      <div
+        class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4"
+      >
+        <div>
+          <nav
+            class="flex items-center gap-2 text-on-surface-variant font-label-md text-[11px] uppercase tracking-wider mb-2"
+          >
+            <span class="cursor-pointer hover:text-primary">ERP</span>
+            <span class="material-symbols-outlined text-[14px]"
+              >chevron_right</span
+            >
+            <span class="text-primary font-bold">Gestión de Proveedores</span>
+          </nav>
+          <h2
+            class="font-display-lg text-display-lg text-primary tracking-tight"
+          >
+            Proveedores
+          </h2>
+          <p class="text-on-surface-variant font-body-md mt-1">
+            Directorio maestro y control operativo de suministros.
+          </p>
+        </div>
+        <button
+          class="bg-secondary text-on-secondary px-6 py-3 rounded-lg font-label-md flex items-center gap-2 shadow-md hover:bg-secondary/90 transition-all active:scale-95"
+        >
+          <span class="material-symbols-outlined">add</span>
+          Registrar Proveedor
+        </button>
+      </div>
+      <!-- Filters & Quick Actions Bento -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-8">
+        <!-- Filter Controls -->
+        <div
+          class="md:col-span-8 bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/30"
+        >
+          <div class="flex flex-wrap gap-4 items-center">
+            <div class="flex-1 min-w-[200px]">
+              <label
+                class="block font-label-md text-on-surface-variant mb-1 ml-1"
+                >Categoría</label
+              >
+              <select
+                class="w-full border-outline-variant rounded-lg font-body-md bg-background focus:ring-secondary"
+              >
+                <option>Todas las categorías</option>
+                <option>Logística</option>
+                <option>Materia Prima</option>
+                <option>Tecnología</option>
+                <option>Mantenimiento</option>
+              </select>
+            </div>
+            <div class="flex-1 min-w-[200px]">
+              <label
+                class="block font-label-md text-on-surface-variant mb-1 ml-1"
+                >Estado</label
+              >
+              <select
+                class="w-full border-outline-variant rounded-lg font-body-md bg-background focus:ring-secondary"
+              >
+                <option>Todos los estados</option>
+                <option>Activo</option>
+                <option>En revisión</option>
+                <option>Inactivo</option>
+              </select>
+            </div>
+            <div class="flex items-end h-full">
+              <button
+                class="h-10 px-4 bg-surface-container-high text-on-surface rounded-lg font-label-md flex items-center gap-2 hover:bg-surface-variant transition-colors border border-outline-variant/30"
+              >
+                <span class="material-symbols-outlined text-[18px]"
+                  >filter_list</span
+                >
+                Más Filtros
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Stats Overview -->
+        <div
+          class="md:col-span-4 bg-primary text-on-primary p-6 rounded-xl shadow-lg flex justify-between items-center relative overflow-hidden"
+        >
+          <div class="relative z-10">
+            <p class="font-label-md opacity-80 uppercase tracking-widest">
+              Proveedores Totales
+            </p>
+            <h3 class="text-4xl font-black mt-1">142</h3>
+            <div class="flex items-center gap-1 mt-2 text-secondary-fixed">
+              <span class="material-symbols-outlined text-[16px]"
+                >trending_up</span
+              >
+              <span class="font-label-md">+4 este mes</span>
+            </div>
+          </div>
+          <div class="absolute -right-4 -bottom-4 opacity-10">
+            <span
+              class="material-symbols-outlined text-[140px]"
+              style="font-variation-settings: &quot;FILL&quot; 1"
+              >local_shipping</span
+            >
+          </div>
+        </div>
+      </div>
+      <!-- Suppliers Table -->
+      <div
+        class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/30 overflow-hidden"
+      >
+        <div
+          class="p-4 border-b border-outline-variant flex justify-between items-center bg-surface-container-low/30"
+        >
+          <h4 class="font-headline-sm text-[16px] text-on-surface font-bold">
+            Listado RF-16
+          </h4>
+          <div class="flex gap-2">
+            <button
+              class="p-2 rounded hover:bg-surface-container-high text-on-surface-variant transition-colors"
+            >
+              <span class="material-symbols-outlined">download</span>
+            </button>
+            <button
+              class="p-2 rounded hover:bg-surface-container-high text-on-surface-variant transition-colors"
+            >
+              <span class="material-symbols-outlined">print</span>
+            </button>
+          </div>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-surface-container-low">
+                <th
+                  class="px-6 py-4 font-label-md text-on-surface-variant border-b border-outline-variant/50"
+                >
+                  PROVEEDOR
+                </th>
+                <th
+                  class="px-6 py-4 font-label-md text-on-surface-variant border-b border-outline-variant/50"
+                >
+                  CONTACTO
+                </th>
+                <th
+                  class="px-6 py-4 font-label-md text-on-surface-variant border-b border-outline-variant/50"
+                >
+                  CATEGORÍA
+                </th>
+                <th
+                  class="px-6 py-4 font-label-md text-on-surface-variant border-b border-outline-variant/50"
+                >
+                  CALIFICACIÓN
+                </th>
+                <th
+                  class="px-6 py-4 font-label-md text-on-surface-variant border-b border-outline-variant/50"
+                >
+                  ESTADO
+                </th>
+                <th
+                  class="px-6 py-4 font-label-md text-on-surface-variant border-b border-outline-variant/50"
+                ></th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-outline-variant/20">
+              <!-- Row 1 -->
+              <tr class="group hover:bg-background transition-colors">
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center font-bold text-primary"
+                    >
+                      SL
+                    </div>
+                    <div>
+                      <p class="font-body-md text-on-surface font-semibold">
+                        Soluciones Logísticas S.A.
+                      </p>
+                      <p class="text-[12px] text-on-surface-variant">
+                        ID: PROV-001
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-4">
+                  <p class="font-body-md text-on-surface">Carlos Mendoza</p>
+                  <p class="text-[12px] text-on-surface-variant">
+                    c.mendoza@logistics.com
+                  </p>
+                </td>
+                <td class="px-6 py-4">
+                  <span
+                    class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-[11px] font-bold rounded-full uppercase tracking-tighter"
+                    >Transporte Nacional</span
+                  >
+                </td>
+                <td class="px-6 py-4">
+                  <div class="flex text-secondary">
+                    <span
+                      class="material-symbols-outlined text-[18px]"
+                      style="font-variation-settings: &quot;FILL&quot; 1"
+                      >star</span
+                    >
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

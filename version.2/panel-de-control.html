@@ -1,0 +1,970 @@
+<!doctype html>
+
+<html class="light" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Asha_spa</title>
+    <!-- Google Fonts: Inter -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&amp;display=swap"
+      rel="stylesheet"
+    />
+    <!-- Material Symbols -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              background: "#f7f9fb",
+              "on-tertiary": "#ffffff",
+              "on-tertiary-fixed": "#0b1c30",
+              "surface-variant": "#e0e3e5",
+              "on-background": "#191c1e",
+              "tertiary-fixed-dim": "#b7c8e1",
+              "surface-bright": "#f7f9fb",
+              "on-primary-fixed": "#3a0031",
+              "secondary-fixed-dim": "#dbc492",
+              "on-tertiary-container": "#2e3e53",
+              "error-container": "#ffdad6",
+              outline: "#85727d",
+              "tertiary-fixed": "#d3e4fe",
+              "secondary-fixed": "#f8e0ac",
+              "on-surface-variant": "#52424c",
+              "on-secondary-fixed": "#251a00",
+              "on-secondary-fixed-variant": "#54451e",
+              "on-error": "#ffffff",
+              "surface-dim": "#d8dadc",
+              "surface-container-low": "#f2f4f6",
+              "surface-tint": "#9b3586",
+              "inverse-surface": "#2d3133",
+              tertiary: "#505f76",
+              "inverse-on-surface": "#eff1f3",
+              "inverse-primary": "#ffade6",
+              "surface-container-highest": "#e0e3e5",
+              "primary-fixed-dim": "#ffade6",
+              "on-tertiary-fixed-variant": "#38485d",
+              "on-secondary": "#ffffff",
+              error: "#ba1a1a",
+              "tertiary-container": "#99a9c2",
+              "secondary-container": "#f5dda9",
+              "on-primary-fixed-variant": "#7e1a6c",
+              "on-primary-container": "#710b62",
+              surface: "#f7f9fb",
+              primary: "#9b3586",
+              "surface-container-high": "#e6e8ea",
+              "on-surface": "#191c1e",
+              "surface-container-lowest": "#ffffff",
+              "on-error-container": "#93000a",
+              "on-secondary-container": "#726137",
+              "surface-container": "#eceef0",
+              "primary-fixed": "#ffd7ef",
+              "primary-container": "#f280d5",
+              "on-primary": "#ffffff",
+              "outline-variant": "#d7c0cd",
+              secondary: "#6d5c33",
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            spacing: {
+              "stack-sm": "8px",
+              "stack-lg": "24px",
+              "container-max": "1440px",
+              gutter: "24px",
+              "stack-md": "16px",
+              "margin-page": "32px",
+              "sidebar-width": "280px",
+            },
+            fontFamily: {
+              "headline-md": ["Inter"],
+              "label-md": ["Inter"],
+              "headline-sm": ["Inter"],
+              "display-lg": ["Inter"],
+              "body-lg": ["Inter"],
+              "body-md": ["Inter"],
+              "table-data": ["Inter"],
+              headline: ["Inter"],
+              display: ["Inter"],
+              body: ["Inter"],
+              label: ["Inter"],
+            },
+            fontSize: {
+              "headline-md": [
+                "24px",
+                {
+                  lineHeight: "32px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-sm": [
+                "20px",
+                { lineHeight: "28px", fontWeight: "600" },
+              ],
+              "display-lg": [
+                "36px",
+                {
+                  lineHeight: "44px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+              "table-data": ["13px", { lineHeight: "18px", fontWeight: "400" }],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        background-color: #f7f9fb;
+        font-family: "Inter", sans-serif;
+        color: #191c1e;
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      .sidebar-active {
+        background-color: #6cf8bb; /* secondary-container */
+        color: #00714d; /* on-secondary-container */
+        border-left-width: 4px;
+        border-color: #006c49; /* secondary */
+        font-weight: 700;
+      }
+      .chart-bar {
+        transition: height 1s ease-in-out;
+      }
+    </style>
+  </head>
+  <body class="flex min-h-screen">
+    <!-- SideNavBar -->
+    <aside
+      class="fixed left-0 top-0 h-full w-sidebar-width bg-surface-container flex flex-col py-stack-lg z-50"
+    >
+      <!-- Brand Header -->
+      <div class="px-6 mb-10 flex items-center gap-3">
+        <div
+          class="w-10 h-10 bg-primary flex items-center justify-center rounded-lg"
+        >
+          <span
+            class="material-symbols-outlined text-white"
+            style="font-variation-settings: &quot;FILL&quot; 1"
+            >precision_manufacturing</span
+          >
+        </div>
+        <div>
+          <h1
+            class="font-headline-md text-headline-md font-black text-on-surface"
+          >
+            Precision ERP
+          </h1>
+          <p class="font-label-md text-label-md text-on-surface-variant">
+            Enterprise Suite
+          </p>
+        </div>
+      </div>
+      <!-- Navigation Tabs -->
+      <nav class="flex-1 px-2 space-y-1">
+        <a
+          class="sidebar-active flex items-center px-4 py-3 rounded-r-full transition-all duration-150 ease-in-out hover:bg-surface-container-high hover:text-on-surface"
+          href="panel-de-control.html"
+        >
+          <span class="material-symbols-outlined mr-3">dashboard</span>
+          <span class="font-label-md text-label-md">Panel de Control</span>
+        </a>
+        <a
+          class="text-on-surface-variant flex items-center px-4 py-3 rounded-r-full transition-all duration-150 ease-in-out hover:bg-surface-container-high hover:text-on-surface"
+          href="gestion-inventario.html"
+        >
+          <span class="material-symbols-outlined mr-3">inventory_2</span>
+          <span class="font-label-md text-label-md">Inventario</span>
+        </a>
+        <a
+          class="text-on-surface-variant flex items-center px-4 py-3 rounded-r-full transition-all duration-150 ease-in-out hover:bg-surface-container-high hover:text-on-surface"
+          href="gestion-reporte.html"
+        >
+          <span class="material-symbols-outlined mr-3">assessment</span>
+          <span class="font-label-md text-label-md">Reportes</span>
+        </a>
+        <a
+          class="text-on-surface-variant flex items-center px-4 py-3 rounded-r-full transition-all duration-150 ease-in-out hover:bg-surface-container-high hover:text-on-surface"
+          href="gestion-proveedores.html"
+        >
+          <span class="material-symbols-outlined mr-3">local_shipping</span>
+          <span class="font-label-md text-label-md">Proveedores</span>
+        </a>
+        <a
+          class="text-on-surface-variant flex items-center px-4 py-3 rounded-r-full transition-all duration-150 ease-in-out hover:bg-surface-container-high hover:text-on-surface"
+          href="gestion-empleado.html"
+        >
+          <span class="material-symbols-outlined mr-3">badge</span>
+          <span class="font-label-md text-label-md">Empleados</span>
+        </a>
+      </nav>
+      <!-- CTA Action -->
+      <div class="px-4 mt-auto mb-6">
+        <button
+          class="w-full bg-secondary text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-md hover:brightness-90 transition-all active:scale-95"
+        >
+          <span class="material-symbols-outlined">add</span>
+          <span class="font-label-md text-label-md">New Entry</span>
+        </button>
+      </div>
+      <!-- Footer Tabs -->
+      <div class="px-2 border-t border-outline-variant pt-4">
+        <a
+          class="text-on-surface-variant flex items-center px-4 py-3 rounded-r-full transition-all duration-150 ease-in-out hover:bg-surface-container-high hover:text-on-surface"
+          href="#"
+        >
+          <span class="material-symbols-outlined mr-3">settings</span>
+          <span class="font-label-md text-label-md">Configuración</span>
+        </a>
+        <a
+          class="text-on-surface-variant flex items-center px-4 py-3 rounded-r-full transition-all duration-150 ease-in-out hover:bg-surface-container-high hover:text-on-surface"
+          href="#"
+        >
+          <span class="material-symbols-outlined mr-3">logout</span>
+          <span class="font-label-md text-label-md">Cerrar sesión</span>
+        </a>
+      </div>
+    </aside>
+    <!-- Main Content Wrapper -->
+    <div class="flex-1 ml-sidebar-width min-h-screen flex flex-col">
+      <!-- TopNavBar -->
+      <header
+        class="w-full h-16 bg-surface-container-lowest border-b border-outline-variant shadow-sm flex justify-between items-center px-gutter z-40 sticky top-0"
+      >
+        <div class="flex items-center flex-1 max-w-xl">
+          <div class="relative w-full">
+            <span
+              class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
+              >search</span
+            >
+            <input
+              class="w-full pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full text-body-md focus:ring-2 focus:ring-secondary transition-all"
+              placeholder="Buscar reportes, inventario o servicios..."
+              type="text"
+            />
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <button
+            class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors relative"
+          >
+            <span class="material-symbols-outlined">notifications</span>
+            <span
+              class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"
+            ></span>
+          </button>
+          <button
+            class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors"
+          >
+            <span class="material-symbols-outlined">settings</span>
+          </button>
+          <div class="h-8 w-[1px] bg-outline-variant mx-2"></div>
+          <div
+            class="flex items-center gap-3 cursor-pointer p-1 pr-3 hover:bg-surface-container-low rounded-full transition-all"
+          >
+            <img
+              class="w-9 h-9 rounded-full object-cover border-2 border-secondary-container"
+              data-alt="A professional headshot of a corporate manager in their late 40s, wearing a clean charcoal suit and glasses. The background is a blurred high-end office interior with soft afternoon sunlight coming through floor-to-ceiling windows. The aesthetic is clean, professional, and corporate-modern with a neutral color palette."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVSnddoghhtqedpt4Q2XYygf7_q0hiBs1ZeFWP9RAMGf-R-jSymCjgYsQFn9Np5WFN9j_TqfwUe3clEdK8sVe6_y6ayOJCZ9ZaLIoDV-aebH2dimMS8WT3hSQO5uGhytSZf7qdDUV3sAvHUrdaGTQceOEHPtiqUuYTddxyiWiouIZsgdOHzkaxbemza0nTvWHzuKeBW0obADIpehqYe6i9tNpb_3ytM8a9wwbHxajlcEcabZokhPy1fMx9yvIJI59i9QQGWQh0fIo"
+            />
+            <div class="hidden lg:block">
+              <p
+                class="font-label-md text-label-md text-on-surface leading-tight"
+              >
+                Admin Principal
+              </p>
+              <p
+                class="text-[10px] text-on-surface-variant uppercase tracking-wider"
+              >
+                Enterprise Precision
+              </p>
+            </div>
+          </div>
+        </div>
+      </header>
+      <!-- Page Canvas -->
+      <main class="flex-1 p-margin-page max-w-container-max mx-auto w-full">
+        <!-- Hero Header Section -->
+        <section
+          class="mb-stack-lg flex flex-col md:flex-row md:items-end justify-between gap-4"
+        >
+          <div>
+            <h2 class="font-display-lg text-display-lg text-primary">
+              Panel de Control
+            </h2>
+            <p class="font-body-lg text-body-lg text-on-surface-variant mt-1">
+              Resumen operativo y métricas críticas de Precision ERP.
+            </p>
+          </div>
+          <div class="flex gap-3">
+            <button
+              class="px-4 py-2 bg-surface-container-highest border border-outline-variant rounded-lg font-label-md text-label-md flex items-center gap-2 hover:bg-surface-container-high transition-all"
+            >
+              <span class="material-symbols-outlined text-[18px]"
+                >calendar_today</span
+              >
+              Enero 2024
+            </button>
+            <button
+              class="px-4 py-2 bg-primary text-white rounded-lg font-label-md text-label-md flex items-center gap-2 shadow-sm hover:brightness-110 transition-all"
+            >
+              <span class="material-symbols-outlined text-[18px]"
+                >file_download</span
+              >
+              Exportar Reporte
+            </button>
+          </div>
+        </section>
+        <!-- Quick Metrics Grid -->
+        <section
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter mb-stack-lg"
+        >
+          <!-- Metric Card 1 -->
+          <div
+            class="bg-surface-container-lowest p-6 rounded-xl shadow-[4px_4px_20px_rgba(0,0,0,0.02)] border border-outline-variant/30 flex items-start justify-between"
+          >
+            <div>
+              <p
+                class="font-label-md text-label-md text-on-surface-variant mb-2"
+              >
+                Ingresos Totales
+              </p>
+              <h3 class="font-headline-md text-headline-md">$124,592.00</h3>
+              <p
+                class="text-secondary font-bold text-[12px] flex items-center mt-2"
+              >
+                <span class="material-symbols-outlined text-[16px] mr-1"
+                  >trending_up</span
+                >
+                +12.5% vs mes anterior
+              </p>
+            </div>
+            <div
+              class="p-3 bg-secondary-container rounded-lg text-on-secondary-container"
+            >
+              <span class="material-symbols-outlined">payments</span>
+            </div>
+          </div>
+          <!-- Metric Card 2 -->
+          <div
+            class="bg-surface-container-lowest p-6 rounded-xl shadow-[4px_4px_20px_rgba(0,0,0,0.02)] border border-outline-variant/30 flex items-start justify-between"
+          >
+            <div>
+              <p
+                class="font-label-md text-label-md text-on-surface-variant mb-2"
+              >
+                Servicios Realizados
+              </p>
+              <h3 class="font-headline-md text-headline-md">1,204</h3>
+              <p
+                class="text-secondary font-bold text-[12px] flex items-center mt-2"
+              >
+                <span class="material-symbols-outlined text-[16px] mr-1"
+                  >trending_up</span
+                >
+                +3.2% vs mes anterior
+              </p>
+            </div>
+            <div
+              class="p-3 bg-primary-fixed text-on-primary-fixed-variant rounded-lg"
+            >
+              <span class="material-symbols-outlined">construction</span>
+            </div>
+          </div>
+          <!-- Metric Card 3 -->
+          <div
+            class="bg-surface-container-lowest p-6 rounded-xl shadow-[4px_4px_20px_rgba(0,0,0,0.02)] border border-outline-variant/30 flex items-start justify-between"
+          >
+            <div>
+              <p
+                class="font-label-md text-label-md text-on-surface-variant mb-2"
+              >
+                Órdenes Pendientes
+              </p>
+              <h3 class="font-headline-md text-headline-md">48</h3>
+              <p
+                class="text-error font-bold text-[12px] flex items-center mt-2"
+              >
+                <span class="material-symbols-outlined text-[16px] mr-1"
+                  >warning</span
+                >
+                5 críticas
+              </p>
+            </div>
+            <div
+              class="p-3 bg-tertiary-fixed text-on-tertiary-fixed-variant rounded-lg"
+            >
+              <span class="material-symbols-outlined">pending_actions</span>
+            </div>
+          </div>
+          <!-- Metric Card 4 -->
+          <div
+            class="bg-surface-container-lowest p-6 rounded-xl shadow-[4px_4px_20px_rgba(0,0,0,0.02)] border border-outline-variant/30 flex items-start justify-between"
+          >
+            <div>
+              <p
+                class="font-label-md text-label-md text-on-surface-variant mb-2"
+              >
+                Stock Bajo
+              </p>
+              <h3 class="font-headline-md text-headline-md">12 Items</h3>
+              <p
+                class="text-on-surface-variant text-[12px] flex items-center mt-2"
+              >
+                <span class="material-symbols-outlined text-[16px] mr-1"
+                  >inventory</span
+                >
+                Requiere atención
+              </p>
+            </div>
+            <div
+              class="p-3 bg-error-container text-on-error-container rounded-lg"
+            >
+              <span class="material-symbols-outlined">inventory_2</span>
+            </div>
+          </div>
+        </section>
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+          <!-- RF-12: Recent Sales Visualizer (Bar Chart) -->
+          <section
+            class="lg:col-span-8 bg-surface-container-lowest p-gutter rounded-xl shadow-[4px_4px_20px_rgba(0,0,0,0.02)] border border-outline-variant/30"
+          >
+            <div class="flex items-center justify-between mb-8">
+              <div>
+                <h4 class="font-headline-sm text-headline-sm text-primary">
+                  Ventas Recientes (RF-12)
+                </h4>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                  Análisis semanal de rendimiento transaccional
+                </p>
+              </div>
+              <div class="flex gap-2">
+                <span
+                  class="flex items-center gap-1 text-[12px] text-on-surface-variant"
+                  ><span class="w-3 h-3 bg-secondary rounded-full"></span>
+                  Ventas</span
+                >
+                <span
+                  class="flex items-center gap-1 text-[12px] text-on-surface-variant"
+                  ><span
+                    class="w-3 h-3 bg-primary-fixed-dim rounded-full"
+                  ></span>
+                  Meta</span
+                >
+              </div>
+            </div>
+            <!-- Simplified CSS Bar Chart -->
+            <div
+              class="h-64 flex items-end justify-between gap-4 px-4 border-b border-outline-variant pb-2 relative"
+            >
+              <!-- Chart Lines (Y Axis Helper) -->
+              <div
+                class="absolute inset-x-0 bottom-[25%] h-[1px] bg-outline-variant/10"
+              ></div>
+              <div
+                class="absolute inset-x-0 bottom-[50%] h-[1px] bg-outline-variant/10"
+              ></div>
+              <div
+                class="absolute inset-x-0 bottom-[75%] h-[1px] bg-outline-variant/10"
+              ></div>
+              <!-- Bars -->
+              <div class="flex-1 flex flex-col items-center gap-1 group">
+                <div
+                  class="w-full max-w-[40px] bg-secondary chart-bar rounded-t"
+                  style="height: 60%"
+                ></div>
+                <span
+                  class="font-label-md text-label-md text-on-surface-variant mt-2"
+                  >Lun</span
+                >
+              </div>
+              <div class="flex-1 flex flex-col items-center gap-1 group">
+                <div
+                  class="w-full max-w-[40px] bg-secondary chart-bar rounded-t"
+                  style="height: 45%"
+                ></div>
+                <span
+                  class="font-label-md text-label-md text-on-surface-variant mt-2"
+                  >Mar</span
+                >
+              </div>
+              <div class="flex-1 flex flex-col items-center gap-1 group">
+                <div
+                  class="w-full max-w-[40px] bg-secondary chart-bar rounded-t"
+                  style="height: 85%"
+                ></div>
+                <span
+                  class="font-label-md text-label-md text-on-surface-variant mt-2"
+                  >Mie</span
+                >
+              </div>
+              <div class="flex-1 flex flex-col items-center gap-1 group">
+                <div
+                  class="w-full max-w-[40px] bg-secondary chart-bar rounded-t"
+                  style="height: 40%"
+                ></div>
+                <span
+                  class="font-label-md text-label-md text-on-surface-variant mt-2"
+                  >Jue</span
+                >
+              </div>
+              <div class="flex-1 flex flex-col items-center gap-1 group">
+                <div
+                  class="w-full max-w-[40px] bg-secondary chart-bar rounded-t"
+                  style="height: 70%"
+                ></div>
+                <span
+                  class="font-label-md text-label-md text-on-surface-variant mt-2"
+                  >Vie</span
+                >
+              </div>
+              <div class="flex-1 flex flex-col items-center gap-1 group">
+                <div
+                  class="w-full max-w-[40px] bg-secondary chart-bar rounded-t"
+                  style="height: 95%"
+                ></div>
+                <span
+                  class="font-label-md text-label-md text-on-surface-variant mt-2"
+                  >Sab</span
+                >
+              </div>
+              <div class="flex-1 flex flex-col items-center gap-1 group">
+                <div
+                  class="w-full max-w-[40px] bg-secondary chart-bar rounded-t"
+                  style="height: 30%"
+                ></div>
+                <span
+                  class="font-label-md text-label-md text-on-surface-variant mt-2"
+                  >Dom</span
+                >
+              </div>
+            </div>
+          </section>
+          <!-- RF-13: Most Requested Services -->
+          <section
+            class="lg:col-span-4 bg-surface-container-lowest p-gutter rounded-xl shadow-[4px_4px_20px_rgba(0,0,0,0.02)] border border-outline-variant/30 flex flex-col"
+          >
+            <div class="mb-6">
+              <h4 class="font-headline-sm text-headline-sm text-primary">
+                Servicios Solicitados (RF-13)
+              </h4>
+              <p class="font-body-md text-body-md text-on-surface-variant">
+                Top 5 servicios por volumen
+              </p>
+            </div>
+            <div class="space-y-5">
+              <div class="flex items-center gap-4">
+                <div
+                  class="w-10 h-10 bg-surface-container-high rounded-full flex items-center justify-center flex-shrink-0"
+                >
+                  <span
+                    class="material-symbols-outlined text-on-surface-variant"
+                    >tune</span
+                  >
+                </div>
+                <div class="flex-1">
+                  <div class="flex justify-between mb-1">
+                    <span class="font-label-md text-label-md"
+                      >Calibración de Precisión</span
+                    >
+                    <span class="font-label-md text-label-md font-bold"
+                      >342</span
+                    >
+                  </div>
+                  <div
+                    class="w-full bg-surface-variant h-1.5 rounded-full overflow-hidden"
+                  >
+                    <div
+                      class="bg-secondary h-full rounded-full"
+                      style="width: 85%"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <div
+                  class="w-10 h-10 bg-surface-container-high rounded-full flex items-center justify-center flex-shrink-0"
+                >
+                  <span
+                    class="material-symbols-outlined text-on-surface-variant"
+                    >precision_manufacturing</span
+                  >
+                </div>
+                <div class="flex-1">
+                  <div class="flex justify-between mb-1">
+                    <span class="font-label-md text-label-md"
+                      >Mantenimiento Preventivo</span
+                    >
+                    <span class="font-label-md text-label-md font-bold"
+                      >210</span
+                    >
+                  </div>
+                  <div
+                    class="w-full bg-surface-variant h-1.5 rounded-full overflow-hidden"
+                  >
+                    <div
+                      class="bg-secondary h-full rounded-full"
+                      style="width: 60%"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <div
+                  class="w-10 h-10 bg-surface-container-high rounded-full flex items-center justify-center flex-shrink-0"
+                >
+                  <span
+                    class="material-symbols-outlined text-on-surface-variant"
+                    >search_check</span
+                  >
+                </div>
+                <div class="flex-1">
+                  <div class="flex justify-between mb-1">
+                    <span class="font-label-md text-label-md"
+                      >Auditoría Técnica</span
+                    >
+                    <span class="font-label-md text-label-md font-bold"
+                      >156</span
+                    >
+                  </div>
+                  <div
+                    class="w-full bg-surface-variant h-1.5 rounded-full overflow-hidden"
+                  >
+                    <div
+                      class="bg-secondary h-full rounded-full"
+                      style="width: 45%"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <div
+                  class="w-10 h-10 bg-surface-container-high rounded-full flex items-center justify-center flex-shrink-0"
+                >
+                  <span
+                    class="material-symbols-outlined text-on-surface-variant"
+                    >support_agent</span
+                  >
+                </div>
+                <div class="flex-1">
+                  <div class="flex justify-between mb-1">
+                    <span class="font-label-md text-label-md"
+                      >Soporte On-Site</span
+                    >
+                    <span class="font-label-md text-label-md font-bold"
+                      >98</span
+                    >
+                  </div>
+                  <div
+                    class="w-full bg-surface-variant h-1.5 rounded-full overflow-hidden"
+                  >
+                    <div
+                      class="bg-secondary h-full rounded-full"
+                      style="width: 25%"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              class="mt-auto pt-6 text-secondary font-bold text-[13px] hover:underline flex items-center gap-1 transition-all"
+            >
+              Ver análisis detallado
+              <span class="material-symbols-outlined text-[16px]"
+                >chevron_right</span
+              >
+            </button>
+          </section>
+          <!-- Inventory Quick Status -->
+          <section
+            class="lg:col-span-12 bg-surface-container-lowest p-gutter rounded-xl shadow-[4px_4px_20px_rgba(0,0,0,0.02)] border border-outline-variant/30"
+          >
+            <div
+              class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4"
+            >
+              <div>
+                <h4 class="font-headline-sm text-headline-sm text-primary">
+                  Estado del Inventario
+                </h4>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                  Items críticos y existencias actuales
+                </p>
+              </div>
+              <div class="flex gap-2">
+                <button
+                  class="px-3 py-1.5 border border-outline-variant rounded-lg text-label-md hover:bg-surface-container-low transition-colors"
+                >
+                  Todos
+                </button>
+                <button
+                  class="px-3 py-1.5 border border-outline-variant rounded-lg text-label-md bg-secondary-container text-on-secondary-container font-bold"
+                >
+                  Stock Bajo
+                </button>
+                <button
+                  class="px-3 py-1.5 border border-outline-variant rounded-lg text-label-md hover:bg-surface-container-low transition-colors"
+                >
+                  Agotado
+                </button>
+              </div>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full border-collapse">
+                <thead>
+                  <tr class="border-b border-outline-variant text-left">
+                    <th
+                      class="py-4 px-4 font-label-md text-label-md text-on-surface-variant"
+                    >
+                      PRODUCTO
+                    </th>
+                    <th
+                      class="py-4 px-4 font-label-md text-label-md text-on-surface-variant"
+                    >
+                      CATEGORÍA
+                    </th>
+                    <th
+                      class="py-4 px-4 font-label-md text-label-md text-on-surface-variant text-center"
+                    >
+                      CANTIDAD
+                    </th>
+                    <th
+                      class="py-4 px-4 font-label-md text-label-md text-on-surface-variant"
+                    >
+                      ESTADO
+                    </th>
+                    <th
+                      class="py-4 px-4 font-label-md text-label-md text-on-surface-variant text-right"
+                    >
+                      ACCIÓN
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-outline-variant/30">
+                  <tr
+                    class="hover:bg-surface-container-low transition-colors group"
+                  >
+                    <td class="py-4 px-4 flex items-center gap-3">
+                      <div
+                        class="w-10 h-10 rounded bg-surface-variant overflow-hidden"
+                      >
+                        <img
+                          class="w-full h-full object-cover"
+                          data-alt="Close-up photograph of a highly precise digital caliper resting on a blueprint in a sterile engineering laboratory. The lighting is cold and clinical, highlighting the metallic texture and digital display. Professional, technical, and clean aesthetic with deep blues and metallic grays."
+                          src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDwAh7ffiUldoTAGxj3E7PxdYwvAXbhCnkFEhAuDYRBJdSmJ4Vb4Ok7hwnaNrSPihHHDgt_Tkat9Y2xfaCXekvxcLs-3rOZIcrINq4G7pPYb24MhpfdY-zF-ziwhRgZGGhhyO7xFk9RaXtMHISnSMDJDe9Tn8ouTiA69HxfTfAs_Hz1Ns0rTrrgv-bX7fxjhR5jqqOgHCcesOU8Zv2HBLHfeVZXr9UMLq5uKu9PDwY4xvT_v1WTm607JHqItsMtBHoVraE7hrVdKs"
+                        />
+                      </div>
+                      <div>
+                        <p class="font-table-data text-table-data font-bold">
+                          Calibrador Digital Pro X
+                        </p>
+                        <p class="text-[11px] text-on-surface-variant">
+                          SKU: CPX-9012
+                        </p>
+                      </div>
+                    </td>
+                    <td class="py-4 px-4 font-table-data text-table-data">
+                      Instrumentación
+                    </td>
+                    <td
+                      class="py-4 px-4 font-table-data text-table-data text-center font-bold text-error"
+                    >
+                      3
+                    </td>
+                    <td class="py-4 px-4">
+                      <span
+                        class="px-2 py-1 bg-error-container text-on-error-container text-[10px] font-bold rounded uppercase"
+                        >Crítico</span
+                      >
+                    </td>
+                    <td class="py-4 px-4 text-right">
+                      <button
+                        class="text-on-surface-variant hover:text-primary transition-colors"
+                      >
+                        <span class="material-symbols-outlined">more_vert</span>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr
+                    class="hover:bg-surface-container-low transition-colors group"
+                  >
+                    <td class="py-4 px-4 flex items-center gap-3">
+                      <div
+                        class="w-10 h-10 rounded bg-surface-variant overflow-hidden"
+                      >
+                        <img
+                          class="w-full h-full object-cover"
+                          data-alt="A macro shot of industrial grade synthetic lubricant in a clear glass container. Small air bubbles are trapped within the viscous amber fluid. The background is a clean, white-tiled workshop environment with industrial shelving. Warm lighting creates a premium, high-quality material feeling."
+                          src="https://lh3.googleusercontent.com/aida-public/AB6AXuCV0LTq1wQ0g7hB9sMRn3tFlhWnxgYOw11eRpXowK4ODNwyr4JqS9LSu4jW2wXVdRRU3ayb53dBYJxYcousQiWs2BUxou_0jWtWSA_A9DQwoqKNcdAeZF7WwE9iIIHxt19vKNVusV5fXJ8A3jWVdiwSSdU4gZJxSWp-dgqDCluPSJfT_s8vAET9Ky-APUVASokKAWdHepubaAAhrB2MHfmNP9MPg9cslxWg40PParUzzQhOzJGaBbzzwRBT1PmZ1b6D95ZEiPSVxXk"
+                        />
+                      </div>
+                      <div>
+                        <p class="font-table-data text-table-data font-bold">
+                          Lubricante Sintético S-4
+                        </p>
+                        <p class="text-[11px] text-on-surface-variant">
+                          SKU: LUB-4421
+                        </p>
+                      </div>
+                    </td>
+                    <td class="py-4 px-4 font-table-data text-table-data">
+                      Consumibles
+                    </td>
+                    <td
+                      class="py-4 px-4 font-table-data text-table-data text-center font-bold text-on-surface-variant"
+                    >
+                      12
+                    </td>
+                    <td class="py-4 px-4">
+                      <span
+                        class="px-2 py-1 bg-tertiary-fixed text-on-tertiary-fixed-variant text-[10px] font-bold rounded uppercase"
+                        >Bajo</span
+                      >
+                    </td>
+                    <td class="py-4 px-4 text-right">
+                      <button
+                        class="text-on-surface-variant hover:text-primary transition-colors"
+                      >
+                        <span class="material-symbols-outlined">more_vert</span>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr
+                    class="hover:bg-surface-container-low transition-colors group"
+                  >
+                    <td class="py-4 px-4 flex items-center gap-3">
+                      <div
+                        class="w-10 h-10 rounded bg-surface-variant overflow-hidden"
+                      >
+                        <img
+                          class="w-full h-full object-cover"
+                          data-alt="Detail shot of a specialized micro-filter component for industrial machinery. The filter mesh is extremely fine, made of brushed stainless steel. It is set against a dark, tech-focused background with hints of cyan light. The focus is razor sharp on the mesh pattern."
+                          src="https://lh3.googleusercontent.com/aida-public/AB6AXuALnMJNxJTcF5gdCCQVpgS4gvQzK7R5O8zbh3dLavNAiWlhXJWaHwaYLpOGXb5TBs0MbWam9T-qXJ1Q0yn2bpwMvVtW-ePRZcz90heQW79J7AFvx018jGV_9P629cDmKJylTEDjNmj2Avc7UIudee-W8jdJ_gs015heZJ6AAKah_lI1sMZ3gzOrBIaEXzKlBfj_dLIUNXxxfhjrOrMS-OGdZdGLCl0y-p5tzX-6tK5iDMFCZ3ys2nNB7Q2eFQlQXlJZ1htjQBzGW0g"
+                        />
+                      </div>
+                      <div>
+                        <p class="font-table-data text-table-data font-bold">
+                          Micro-Filtro de Cerámica
+                        </p>
+                        <p class="text-[11px] text-on-surface-variant">
+                          SKU: FIL-220
+                        </p>
+                      </div>
+                    </td>
+                    <td class="py-4 px-4 font-table-data text-table-data">
+                      Filtros
+                    </td>
+                    <td
+                      class="py-4 px-4 font-table-data text-table-data text-center font-bold text-error"
+                    >
+                      0
+                    </td>
+                    <td class="py-4 px-4">
+                      <span
+                        class="px-2 py-1 bg-outline text-white text-[10px] font-bold rounded uppercase"
+                        >Agotado</span
+                      >
+                    </td>
+                    <td class="py-4 px-4 text-right">
+                      <button
+                        class="text-on-surface-variant hover:text-primary transition-colors"
+                      >
+                        <span class="material-symbols-outlined">more_vert</span>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="mt-6 flex justify-center">
+              <button
+                class="text-secondary font-bold text-[13px] hover:underline flex items-center gap-1 transition-all"
+              >
+                Ir al módulo de inventario completo
+                <span class="material-symbols-outlined text-[16px]"
+                  >open_in_new</span
+                >
+              </button>
+            </div>
+          </section>
+        </div>
+      </main>
+      <!-- Footer -->
+      <footer
+        class="mt-auto py-6 px-margin-page bg-surface-container-low border-t border-outline-variant text-center"
+      >
+        <p class="text-label-md text-on-surface-variant">
+          © 2024 Precision ERP - Sistema de Gestión Empresarial de Alta
+          Densidad. Todos los derechos reservados.
+        </p>
+      </footer>
+    </div>
+    <!-- Floating Action Button (FAB) - Contextual for Dashboard -->
+    <button
+      class="fixed bottom-8 right-8 w-14 h-14 bg-primary text-white rounded-full shadow-xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50 group"
+    >
+      <span class="material-symbols-outlined text-[28px]">add</span>
+      <span
+        class="absolute right-16 bg-primary text-white px-4 py-2 rounded-lg font-label-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-lg pointer-events-none"
+        >Nuevo Registro Rápido</span
+      >
+    </button>
+    <script>
+      // Micro-interaction: Update active state in sidebar (simulation)
+      const navLinks = document.querySelectorAll("aside nav a");
+      navLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          navLinks.forEach((l) => {
+            l.classList.remove("sidebar-active");
+            l.classList.add("text-on-surface-variant");
+          });
+          link.classList.add("sidebar-active");
+          link.classList.remove("text-on-surface-variant");
+        });
+      });
+
+      // Animation logic for bars
+      document.addEventListener("DOMContentLoaded", () => {
+        const bars = document.querySelectorAll(".chart-bar");
+        bars.forEach((bar) => {
+          const finalHeight = bar.style.height;
+          bar.style.height = "0";
+          setTimeout(() => {
+            bar.style.height = finalHeight;
+          }, 300);
+        });
+      });
+    </script>
+  </body>
+</html>
