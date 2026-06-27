@@ -1,0 +1,1121 @@
+<!doctype html>
+<html class="light" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      .user-row:hover .row-actions {
+        opacity: 1;
+      }
+    </style>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface-variant": "#52424c",
+              surface: "#f7f9fb",
+              "on-secondary-fixed-variant": "#54451e",
+              "surface-container-highest": "#e0e3e5",
+              "on-primary": "#ffffff",
+              "tertiary-fixed": "#d3e4fe",
+              "secondary-fixed-dim": "#dbc492",
+              "primary-container": "#f280d5",
+              "error-container": "#ffdad6",
+              "inverse-primary": "#ffade6",
+              "on-primary-fixed-variant": "#7e1a6c",
+              "on-tertiary": "#ffffff",
+              "on-error-container": "#93000a",
+              "primary-fixed": "#ffd7ef",
+              "outline-variant": "#d7c0cd",
+              tertiary: "#505f76",
+              "tertiary-container": "#99a9c2",
+              "on-primary-fixed": "#3a0031",
+              "surface-dim": "#d8dadc",
+              outline: "#85727d",
+              background: "#f7f9fb",
+              "inverse-surface": "#2d3133",
+              "surface-tint": "#9b3586",
+              primary: "#9b3586",
+              "secondary-container": "#f5dda9",
+              "on-surface": "#191c1e",
+              "on-secondary-fixed": "#251a00",
+              "primary-fixed-dim": "#ffade6",
+              secondary: "#6d5c33",
+              "on-error": "#ffffff",
+              "tertiary-fixed-dim": "#b7c8e1",
+              "inverse-on-surface": "#eff1f3",
+              "on-primary-container": "#710b62",
+              "on-background": "#191c1e",
+              "on-secondary": "#ffffff",
+              "surface-container": "#eceef0",
+              "surface-container-low": "#f2f4f6",
+              "surface-container-lowest": "#ffffff",
+              "secondary-fixed": "#f8e0ac",
+              "on-secondary-container": "#726137",
+              error: "#ba1a1a",
+              "surface-container-high": "#e6e8ea",
+              "on-tertiary-container": "#2e3e53",
+              "on-tertiary-fixed": "#0b1c30",
+              "surface-bright": "#f7f9fb",
+              "on-tertiary-fixed-variant": "#38485d",
+              "surface-variant": "#e0e3e5",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              "container-max": "1280px",
+              sm: "12px",
+              lg: "24px",
+              base: "4px",
+              xs: "8px",
+              gutter: "20px",
+              md: "16px",
+              xl: "32px",
+            },
+            fontFamily: {
+              "headline-md": ["Inter"],
+              "body-md": ["Inter"],
+              "body-lg": ["Inter"],
+              "data-table": ["Inter"],
+              display: ["Inter"],
+              "headline-lg": ["Inter"],
+              "label-md": ["Inter"],
+              headline: ["Inter"],
+              body: ["Inter"],
+              label: ["Inter"],
+            },
+            fontSize: {},
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-surface text-on-surface font-body-md overflow-x-hidden">
+    <!-- Shell Layout Wrapper -->
+    <div class="flex min-h-screen">
+      <!-- SideNavBar (Shared Component) -->
+      <aside
+        class="flex flex-col fixed left-0 top-0 h-full py-lg px-md h-screen w-64 border-r border-outline-variant bg-surface-container-lowest dark:bg-primary-container z-50"
+      >
+        <div class="flex items-center gap-sm mb-xl">
+          <img
+            class="w-8 h-8 rounded"
+            data-alt="Corporate minimalist logo for a high-end administration software named AdminPro. The logo features sharp geometric lines and a monochrome palette of black and white, conveying professional stability and technological precision. The lighting is crisp and clear, suited for a professional software environment."
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_xcMqN5DmJHazu6VsCg9hIxrcPjaWmaOwdLRe2I98a-Jue8_Yk3K0BgfVktKUs9QXc5efdHzgBZO79xV_LQawlLAPSDDs6rKzg2o9ZHz1GUWinxJWbIAV50FspOmtr_SRmZDKMDvC8sMuv0T-T8p3woOdzfjLlslX-T6vSSZdB1sOF2Glj4YBRxsoGyvZK1A2mo66UC80gTCVx_meeoUpJT8DJgXYhrTHRsRjsVClzCEXtEuLvWFxeqhBSmcy-IP5uykWA3W-2N-b"
+          />
+          <div>
+            <h1
+              class="font-headline-md text-headline-md font-bold text-primary dark:text-on-primary"
+            >
+              AdminPro
+            </h1>
+            <p
+              class="text-[10px] text-on-surface-variant tracking-wider uppercase"
+            >
+              Gestión Empresarial
+            </p>
+          </div>
+        </div>
+        <nav class="flex-1 space-y-xs">
+          <a
+            class="flex items-center gap-sm px-md py-sm text-on-surface-variant dark:text-on-primary-container hover:bg-surface-container-high dark:hover:bg-primary-fixed-dim transition-colors rounded-lg group"
+            href="dashboard.html"
+          >
+            <span class="material-symbols-outlined text-xl">dashboard</span>
+            <span class="font-body-md">Panel Control</span>
+          </a>
+          <a
+            class="flex items-center gap-sm px-md py-sm text-on-surface-variant dark:text-on-primary-container hover:bg-surface-container-high dark:hover:bg-primary-fixed-dim transition-colors rounded-lg group"
+            href="gestion-citas.html"
+          >
+            <span class="material-symbols-outlined text-xl"
+              >calendar_month</span
+            >
+            <span class="font-body-md">Citas</span>
+          </a>
+          <a
+            class="flex items-center gap-sm px-md py-sm text-on-surface-variant dark:text-on-primary-container hover:bg-surface-container-high dark:hover:bg-primary-fixed-dim transition-colors rounded-lg group"
+            href="gestion-servicios.html"
+          >
+            <span class="material-symbols-outlined text-xl">list_alt</span>
+            <span class="font-body-md">Servicios</span>
+          </a>
+          <a
+            class="flex items-center gap-sm px-md py-sm text-on-surface-variant dark:text-on-primary-container hover:bg-surface-container-high dark:hover:bg-primary-fixed-dim transition-colors rounded-lg group"
+            href="facturacion-pago.html"
+          >
+            <span class="material-symbols-outlined text-xl">payments</span>
+            <span class="font-body-md">Facturación</span>
+          </a>
+          <a
+            class="flex items-center gap-sm px-md py-sm bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary font-semibold rounded-lg transition-all duration-200 ease-in-out active:scale-95"
+            href="gestion-usuario.html"
+          >
+            <span
+              class="material-symbols-outlined text-xl"
+              style="font-variation-settings: &quot;FILL&quot; 1"
+              >group</span
+            >
+            <span class="font-body-md">Usuarios</span>
+          </a>
+        </nav>
+        <div class="mt-auto pt-lg border-t border-outline-variant space-y-xs">
+          <button
+            class="w-full mb-md bg-secondary text-on-secondary py-sm px-md rounded-lg font-semibold flex items-center justify-center gap-xs hover:bg-opacity-90 transition-all active:scale-95"
+          >
+            <span class="material-symbols-outlined">add</span>
+            Nueva Cita
+          </button>
+          <a
+            class="flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg"
+            href="#"
+          >
+            <span class="material-symbols-outlined text-xl">settings</span>
+            <span class="">Configuración</span>
+          </a>
+          <a
+            class="flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg"
+            href="/login"
+            title="Ir a la pantalla de inicio de sesión"
+          >
+            <span class="material-symbols-outlined text-xl text-error"
+              >logout</span
+            >
+            <span class="">Cerrar Sesión</span>
+          </a>
+        </div>
+      </aside>
+      <!-- Main Content Area -->
+      <main class="flex-1 ml-64 min-h-screen flex flex-col">
+        <!-- TopAppBar (Shared Component) -->
+        <header
+          class="flex justify-between items-center w-full px-xl sticky top-0 z-40 bg-surface/95 backdrop-blur-sm h-16 border-b border-outline-variant"
+        >
+          <div class="flex items-center gap-lg flex-1">
+            <div class="relative w-full max-w-md">
+              <span
+                class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-on-surface-variant"
+                >search</span
+              >
+              <input
+                class="w-full bg-surface-container-low border-none rounded-full py-xs pl-xl pr-md font-label-md text-on-surface focus:ring-2 focus:ring-secondary transition-all"
+                placeholder="Buscar usuarios, roles o correos..."
+                type="text"
+              />
+            </div>
+          </div>
+          <div class="flex items-center gap-md">
+            <button
+              class="p-xs hover:bg-surface-container-low rounded-full transition-all"
+            >
+              <span class="material-symbols-outlined text-on-surface-variant"
+                >notifications</span
+              >
+            </button>
+            <button
+              class="p-xs hover:bg-surface-container-low rounded-full transition-all"
+            >
+              <span class="material-symbols-outlined text-on-surface-variant"
+                >help_outline</span
+              >
+            </button>
+            <div class="h-8 w-px bg-outline-variant mx-xs"></div>
+            <div
+              class="flex items-center gap-sm cursor-pointer hover:bg-surface-container-low p-xs rounded-lg transition-all"
+            >
+              <div class="text-right hidden sm:block">
+                <p class="font-label-md text-on-surface leading-none">
+                  Admin Carlos
+                </p>
+                <p class="text-[10px] text-on-surface-variant">
+                  Super Administrador
+                </p>
+              </div>
+              <img
+                class="w-8 h-8 rounded-full border border-outline-variant object-cover"
+                data-alt="Professional headshot of a Hispanic male corporate administrator in a modern office environment. He is wearing a clean white shirt and dark blazer, smiling subtly at the camera. The background is a soft-focus corporate office with minimalist glass partitions and blue-toned lighting to match the AdminPro design system."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0L_lGGCqKuFPaqeWzF8WBOKoChez3tI5PNcGAYeQyxKuaF1Len2CsG9HTrAitmiFpWblIToRJuiK96Vxxr4_yvS28dTZw1BiWHMjU_yqMf2NgieAhNztpns4LX3SsBlsEBNrdecslGJH-w8Jwq13W1Xl6pgXIYASaahu93ZnQx-OOSEr5Cpgx4FV4nKvY5TDk9NBAZlAB5NA3Fhfo-lAumT4D6GGDRxOVuiDViW1SHlBEOTBzHsr7nGqisNovKc9mQPvWSkgL44go"
+              />
+            </div>
+          </div>
+        </header>
+        <!-- Page Content -->
+        <div class="p-xl max-w-container-max mx-auto w-full">
+          <!-- Header Actions -->
+          <div
+            class="flex flex-col md:flex-row md:items-end justify-between gap-lg mb-xl"
+          >
+            <div>
+              <nav
+                class="flex items-center gap-xs text-[10px] uppercase tracking-widest text-on-surface-variant mb-xs"
+              >
+                <span class="">Sistema</span>
+                <span class="material-symbols-outlined text-[12px]"
+                  >chevron_right</span
+                >
+                <span class="text-secondary font-bold"
+                  >Gestión de Usuarios</span
+                >
+              </nav>
+              <h2 class="font-display text-display text-primary">
+                Usuarios del Sistema
+              </h2>
+              <p class="text-on-surface-variant font-body-lg mt-xs">
+                Administra los accesos, roles y perfiles de seguridad de tu
+                organización.
+              </p>
+            </div>
+            <div class="flex gap-md">
+              <button
+                class="px-lg py-sm border border-secondary text-secondary font-semibold rounded-lg flex items-center gap-xs hover:bg-secondary/5 transition-all active:scale-95"
+              >
+                <span class="material-symbols-outlined text-xl"
+                  >file_download</span
+                >
+                Exportar CSV
+              </button>
+              <button
+                class="px-lg py-sm bg-secondary text-on-secondary font-semibold rounded-lg flex items-center gap-xs hover:shadow-lg shadow-secondary/20 transition-all active:scale-95"
+              >
+                <span class="material-symbols-outlined text-xl"
+                  >person_add</span
+                >
+                Añadir Usuario
+              </button>
+            </div>
+          </div>
+          <!-- Stats Overview (Bento Style) -->
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-lg mb-xl">
+            <div
+              class="bg-surface-container-lowest border border-outline-variant p-lg rounded-xl flex items-center gap-lg"
+            >
+              <div
+                class="bg-secondary-fixed text-on-secondary-fixed p-md rounded-lg"
+              >
+                <span
+                  class="material-symbols-outlined text-2xl"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >group</span
+                >
+              </div>
+              <div>
+                <p class="text-on-surface-variant font-label-md">
+                  Total Usuarios
+                </p>
+                <p class="text-headline-lg font-headline-lg">1,284</p>
+              </div>
+            </div>
+            <div
+              class="bg-surface-container-lowest border border-outline-variant p-lg rounded-xl flex items-center gap-lg"
+            >
+              <div
+                class="bg-primary-fixed text-on-primary-fixed p-md rounded-lg"
+              >
+                <span class="material-symbols-outlined text-2xl"
+                  >admin_panel_settings</span
+                >
+              </div>
+              <div>
+                <p class="text-on-surface-variant font-label-md">
+                  Administradores
+                </p>
+                <p class="text-headline-lg font-headline-lg">12</p>
+              </div>
+            </div>
+            <div
+              class="bg-surface-container-lowest border border-outline-variant p-lg rounded-xl flex items-center gap-lg"
+            >
+              <div
+                class="bg-tertiary-fixed text-on-tertiary-fixed p-md rounded-lg"
+              >
+                <span class="material-symbols-outlined text-2xl"
+                  >verified_user</span
+                >
+              </div>
+              <div>
+                <p class="text-on-surface-variant font-label-md">Activos Hoy</p>
+                <p class="text-headline-lg font-headline-lg">452</p>
+              </div>
+            </div>
+            <div
+              class="bg-surface-container-lowest border border-outline-variant p-lg rounded-xl flex items-center gap-lg"
+            >
+              <div
+                class="bg-error-container text-on-error-container p-md rounded-lg"
+              >
+                <span class="material-symbols-outlined text-2xl"
+                  >lock_open</span
+                >
+              </div>
+              <div>
+                <p class="text-on-surface-variant font-label-md">
+                  Solicitudes Acceso
+                </p>
+                <p class="text-headline-lg font-headline-lg">8</p>
+              </div>
+            </div>
+          </div>
+          <!-- Main Data Table Container -->
+          <div
+            class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm"
+          >
+            <!-- Table Toolbar -->
+            <div
+              class="px-lg py-md border-b border-outline-variant flex flex-col sm:flex-row justify-between items-center gap-md bg-surface-container-low"
+            >
+              <div class="flex items-center gap-md w-full sm:w-auto">
+                <select
+                  class="bg-transparent border-outline-variant text-on-surface-variant font-label-md rounded px-sm py-xs focus:ring-secondary"
+                >
+                  <option>Filtrar por Rol</option>
+                  <option>Administrador</option>
+                  <option>Personal (Staff)</option>
+                  <option>Cliente</option>
+                </select>
+                <select
+                  class="bg-transparent border-outline-variant text-on-surface-variant font-label-md rounded px-sm py-xs focus:ring-secondary"
+                >
+                  <option>Estado: Todos</option>
+                  <option>Activo</option>
+                  <option>Inactivo</option>
+                  <option>Suspendido</option>
+                </select>
+              </div>
+              <div class="flex items-center gap-sm">
+                <span class="font-label-md text-on-surface-variant"
+                  >Mostrando 1-10 de 1,284</span
+                >
+                <div
+                  class="flex border border-outline-variant rounded overflow-hidden"
+                >
+                  <button
+                    class="px-sm py-xs bg-surface hover:bg-surface-container-highest transition-colors border-r border-outline-variant"
+                  >
+                    <span class="material-symbols-outlined text-sm"
+                      >chevron_left</span
+                    >
+                  </button>
+                  <button
+                    class="px-sm py-xs bg-surface hover:bg-surface-container-highest transition-colors"
+                  >
+                    <span class="material-symbols-outlined text-sm"
+                      >chevron_right</span
+                    >
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Data Table -->
+            <div class="overflow-x-auto">
+              <table class="w-full border-collapse">
+                <thead class="bg-surface-container-low/50">
+                  <tr>
+                    <th
+                      class="px-lg py-md text-left text-label-md font-label-md text-on-surface-variant border-b border-outline-variant"
+                    >
+                      <div class="flex items-center gap-xs">
+                        Usuario
+                        <span class="material-symbols-outlined text-xs"
+                          >arrow_downward</span
+                        >
+                      </div>
+                    </th>
+                    <th
+                      class="px-lg py-md text-left text-label-md font-label-md text-on-surface-variant border-b border-outline-variant"
+                    >
+                      Rol
+                    </th>
+                    <th
+                      class="px-lg py-md text-left text-label-md font-label-md text-on-surface-variant border-b border-outline-variant"
+                    >
+                      Email
+                    </th>
+                    <th
+                      class="px-lg py-md text-left text-label-md font-label-md text-on-surface-variant border-b border-outline-variant"
+                    >
+                      Último Login
+                    </th>
+                    <th
+                      class="px-lg py-md text-left text-label-md font-label-md text-on-surface-variant border-b border-outline-variant"
+                    >
+                      Estado
+                    </th>
+                    <th
+                      class="px-lg py-md text-right text-label-md font-label-md text-on-surface-variant border-b border-outline-variant"
+                    >
+                      Acciones
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-outline-variant">
+                  <!-- Row 1 -->
+                  <tr
+                    class="user-row hover:bg-surface-container-low transition-colors group"
+                  >
+                    <td class="px-lg py-md">
+                      <div class="flex items-center gap-md">
+                        <div
+                          class="w-9 h-9 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-bold text-xs"
+                        >
+                          AM
+                        </div>
+                        <div>
+                          <p class="font-data-table text-on-surface">
+                            Alejandro Mendoza
+                          </p>
+                          <p class="text-[11px] text-on-surface-variant">
+                            ID: #USR-9021
+                          </p>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-lg py-md">
+                      <span
+                        class="bg-primary/5 text-primary text-[10px] font-bold px-sm py-xs rounded-full border border-primary/10"
+                        >ADMIN</span
+                      >
+                    </td>
+                    <td
+                      class="px-lg py-md font-data-table text-on-surface-variant"
+                    >
+                      a.mendoza@empresa.com
+                    </td>
+                    <td class="px-lg py-md">
+                      <p class="font-data-table text-on-surface">
+                        Hoy, 09:45 AM
+                      </p>
+                      <p class="text-[11px] text-on-surface-variant">
+                        IP: 192.168.1.45
+                      </p>
+                    </td>
+                    <td class="px-lg py-md">
+                      <div class="flex items-center gap-xs">
+                        <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                        <span class="text-xs font-semibold text-green-700"
+                          >Activo</span
+                        >
+                      </div>
+                    </td>
+                    <td class="px-lg py-md text-right">
+                      <div
+                        class="row-actions opacity-0 transition-opacity flex justify-end gap-xs"
+                      >
+                        <button
+                          class="p-xs hover:bg-surface-container-highest rounded text-on-surface-variant"
+                          title="Editar Perfil"
+                        >
+                          <span class="material-symbols-outlined text-lg"
+                            >edit</span
+                          >
+                        </button>
+                        <button
+                          class="p-xs hover:bg-surface-container-highest rounded text-on-surface-variant"
+                          title="Permisos"
+                        >
+                          <span class="material-symbols-outlined text-lg"
+                            >key</span
+                          >
+                        </button>
+                        <button
+                          class="p-xs hover:bg-surface-container-highest rounded text-on-surface-variant"
+                          title="Más"
+                        >
+                          <span class="material-symbols-outlined text-lg"
+                            >more_vert</span
+                          >
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <!-- Row 2 -->
+                  <tr
+                    class="user-row hover:bg-surface-container-low transition-colors group"
+                  >
+                    <td class="px-lg py-md">
+                      <div class="flex items-center gap-md">
+                        <div
+                          class="w-9 h-9 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-bold text-xs"
+                        >
+                          BP
+                        </div>
+                        <div>
+                          <p class="font-data-table text-on-surface">
+                            Beatriz Palacios
+                          </p>
+                          <p class="text-[11px] text-on-surface-variant">
+                            ID: #USR-8842
+                          </p>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-lg py-md">
+                      <span
+                        class="bg-secondary/5 text-secondary text-[10px] font-bold px-sm py-xs rounded-full border border-secondary/10 uppercase"
+                        >Staff</span
+                      >
+                    </td>
+                    <td
+                      class="px-lg py-md font-data-table text-on-surface-variant"
+                    >
+                      beatriz.p@empresa.com
+                    </td>
+                    <td class="px-lg py-md">
+                      <p class="font-data-table text-on-surface">
+                        Ayer, 18:22 PM
+                      </p>
+                      <p class="text-[11px] text-on-surface-variant">
+                        IP: 184.22.1.10
+                      </p>
+                    </td>
+                    <td class="px-lg py-md">
+                      <div class="flex items-center gap-xs">
+                        <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                        <span class="text-xs font-semibold text-green-700"
+                          >Activo</span
+                        >
+                      </div>
+                    </td>
+                    <td class="px-lg py-md text-right">
+                      <div
+                        class="row-actions opacity-0 transition-opacity flex justify-end gap-xs"
+                      >
+                        <button
+                          class="p-xs hover:bg-surface-container-highest rounded text-on-surface-variant"
+                          title="Editar Perfil"
+                        >
+                          <span class="material-symbols-outlined text-lg"
+                            >edit</span
+                          >
+                        </button>
+                        <button
+                          class="p-xs hover:bg-surface-container-highest rounded text-on-surface-variant"
+                          title="Permisos"
+                        >
+                          <span class="material-symbols-outlined text-lg"
+                            >key</span
+                          >
+                        </button>
+                        <button
+                          class="p-xs hover:bg-surface-container-highest rounded text-on-surface-variant"
+                          title="Más"
+                        >
+                          <span class="material-symbols-outlined text-lg"
+                            >more_vert</span
+                          >
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <!-- Row 3 -->
+                  <tr
+                    class="user-row hover:bg-surface-container-low transition-colors group"
+                  >
+                    <td class="px-lg py-md">
+                      <div class="flex items-center gap-md">
+                        <div
+                          class="w-9 h-9 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold text-xs"
+                        >
+                          RC
+                        </div>
+                        <div>
+                          <p class="font-data-table text-on-surface">
+                            Ricardo Castillo
+                          </p>
+                          <p class="text-[11px] text-on-surface-variant">
+                            ID: #USR-7651
+                          </p>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-lg py-md">
+                      <span
+                        class="bg-on-surface-variant/5 text-on-surface-variant text-[10px] font-bold px-sm py-xs rounded-full border border-on-surface-variant/10 uppercase"
+                        >Cliente</span
+                      >
+                    </td>
+                    <td
+                      class="px-lg py-md font-data-table text-on-surface-variant"
+                    >
+                      rcastillo@externo.net
+                    </td>
+                    <td class="px-lg py-md">
+                      <p class="font-data-table text-on-surface">Hace 3 días</p>
+                      <p class="text-[11px] text-on-surface-variant">
+                        IP: 201.144.2.3
+                      </p>
+                    </td>
+                    <td class="px-lg py-md">
+                      <div class="flex items-center gap-xs">
+                        <span class="w-2 h-2 rounded-full bg-outline"></span>
+                        <span
+                          class="text-xs font-semibold text-on-surface-variant"
+                          >Inactivo</span
+                        >
+                      </div>
+                    </td>
+                    <td class="px-lg py-md text-right">
+                      <div
+                        class="row-actions opacity-0 transition-opacity flex justify-end gap-xs"
+                      >
+                        <button
+                          class="p-xs hover:bg-surface-container-highest rounded text-on-surface-variant"
+                          title="Editar Perfil"
+                        >
+                          <span class="material-symbols-outlined text-lg"
+                            >edit</span
+                          >
+                        </button>
+                        <button
+                          class="p-xs hover:bg-surface-container-highest rounded text-on-surface-variant"
+                          title="Permisos"
+                        >
+                          <span class="material-symbols-outlined text-lg"
+                            >key</span
+                          >
+                        </button>
+                        <button
+                          class="p-xs hover:bg-surface-container-highest rounded text-on-surface-variant"
+                          title="Más"
+                        >
+                          <span class="material-symbols-outlined text-lg"
+                            >more_vert</span
+                          >
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <!-- Row 4 -->
+                  <tr
+                    class="user-row hover:bg-surface-container-low transition-colors group"
+                  >
+                    <td class="px-lg py-md">
+                      <div class="flex items-center gap-md">
+                        <img
+                          class="w-9 h-9 rounded-full object-cover border border-outline-variant"
+                          data-alt="A professional small square profile photo of a mature businesswoman with gray hair, wearing stylish glasses and a navy blue business suit. She has a confident and friendly expression. The background is a clean, modern workspace with natural light."
+                          src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCYuKeTDGhdMUwoOg2cVqgACFqf32tMDLu4h7qei09_Cpq7yxojttE-uoqy_-C4jBzbOlfhU5DsJOkOG-7NhM_XwNgU_LHlFOTaZJEgWSHfY96cWkDWyHkobxx5MyTf6iNOKuR00QXNJFlYajh8VfiMBvfMuCbBed8JTBxtTttlGiLJiR-NzRFRm80pFsJK8AT56yaY_hbytoxPOVvlhbD-LqgX-gBoOGuXmECXcESbYaclJJ0Gk2LBP2D-11TfwF8Bk-KoN_LoYLa"
+                        />
+                        <div>
+                          <p class="font-data-table text-on-surface">
+                            Sofía Vergara
+                          </p>
+                          <p class="text-[11px] text-on-surface-variant">
+                            ID: #USR-1044
+                          </p>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-lg py-md">
+                      <span
+                        class="bg-secondary/5 text-secondary text-[10px] font-bold px-sm py-xs rounded-full border border-secondary/10 uppercase"
+                        >Staff</span
+                      >
+                    </td>
+                    <td
+                      class="px-lg py-md font-data-table text-on-surface-variant"
+                    >
+                      s.vergara@empresa.com
+                    </td>
+                    <td class="px-lg py-md">
+                      <p class="font-data-table text-on-surface">
+                        Hoy, 08:15 AM
+                      </p>
+                      <p class="text-[11px] text-on-surface-variant">
+                        IP: 192.168.1.12
+                      </p>
+                    </td>
+                    <td class="px-lg py-md">
+                      <div class="flex items-center gap-xs">
+                        <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                        <span class="text-xs font-semibold text-green-700"
+                          >Activo</span
+                        >
+                      </div>
+                    </td>
+                    <td class="px-lg py-md text-right">
+                      <div
+                        class="row-actions opacity-0 transition-opacity flex justify-end gap-xs"
+                      >
+                        <button
+                          class="p-xs hover:bg-surface-container-highest rounded text-on-surface-variant"
+                          title="Editar Perfil"
+                        >
+                          <span class="material-symbols-outlined text-lg"
+                            >edit</span
+                          >
+                        </button>
+                        <button
+                          class="p-xs hover:bg-surface-container-highest rounded text-on-surface-variant"
+                          title="Permisos"
+                        >
+                          <span class="material-symbols-outlined text-lg"
+                            >key</span
+                          >
+                        </button>
+                        <button
+                          class="p-xs hover:bg-surface-container-highest rounded text-on-surface-variant"
+                          title="Más"
+                        >
+                          <span class="material-symbols-outlined text-lg"
+                            >more_vert</span
+                          >
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <!-- Row 5 -->
+                  <tr
+                    class="user-row hover:bg-surface-container-low transition-colors group"
+                  >
+                    <td class="px-lg py-md">
+                      <div class="flex items-center gap-md">
+                        <div
+                          class="w-9 h-9 rounded-full bg-error-container text-on-error-container flex items-center justify-center font-bold text-xs"
+                        >
+                          JH
+                        </div>
+                        <div>
+                          <p class="font-data-table text-on-surface">
+                            Juan Herrera
+                          </p>
+                          <p class="text-[11px] text-on-surface-variant">
+                            ID: #USR-2022
+                          </p>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-lg py-md">
+                      <span
+                        class="bg-on-surface-variant/5 text-on-surface-variant text-[10px] font-bold px-sm py-xs rounded-full border border-on-surface-variant/10 uppercase"
+                        >Cliente</span
+                      >
+                    </td>
+                    <td
+                      class="px-lg py-md font-data-table text-on-surface-variant"
+                    >
+                      jherrera@proyectos.com
+                    </td>
+                    <td class="px-lg py-md">
+                      <p class="font-data-table text-on-surface">
+                        Hace 2 meses
+                      </p>
+                      <p class="text-[11px] text-on-surface-variant">
+                        IP: 45.12.33.1
+                      </p>
+                    </td>
+                    <td class="px-lg py-md">
+                      <div class="flex items-center gap-xs">
+                        <span class="w-2 h-2 rounded-full bg-error"></span>
+                        <span class="text-xs font-semibold text-error"
+                          >Suspendido</span
+                        >
+                      </div>
+                    </td>
+                    <td class="px-lg py-md text-right">
+                      <div
+                        class="row-actions opacity-0 transition-opacity flex justify-end gap-xs"
+                      >
+                        <button
+                          class="p-xs hover:bg-surface-container-highest rounded text-on-surface-variant"
+                          title="Reactivar"
+                        >
+                          <span
+                            class="material-symbols-outlined text-lg text-green-600"
+                            >check_circle</span
+                          >
+                        </button>
+                        <button
+                          class="p-xs hover:bg-surface-container-highest rounded text-on-surface-variant"
+                          title="Más"
+                        >
+                          <span class="material-symbols-outlined text-lg"
+                            >more_vert</span
+                          >
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- Table Footer / Pagination -->
+            <div
+              class="p-lg bg-surface-container-lowest flex flex-col md:flex-row items-center justify-between gap-md"
+            >
+              <div class="flex items-center gap-md">
+                <span class="font-label-md text-on-surface-variant"
+                  >Filas por página:</span
+                >
+                <select
+                  class="bg-transparent border-outline-variant text-on-surface-variant font-label-md rounded px-xs py-1 focus:ring-secondary"
+                >
+                  <option>10</option>
+                  <option>25</option>
+                  <option>50</option>
+                </select>
+              </div>
+              <div class="flex items-center gap-xs">
+                <button
+                  class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-container-low transition-colors"
+                >
+                  <span class="material-symbols-outlined text-lg"
+                    >first_page</span
+                  >
+                </button>
+                <button
+                  class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-container-low transition-colors"
+                >
+                  <span class="material-symbols-outlined text-lg"
+                    >chevron_left</span
+                  >
+                </button>
+                <button
+                  class="px-sm py-xs bg-secondary-container text-on-secondary-container font-bold rounded-lg text-xs"
+                >
+                  1
+                </button>
+                <button
+                  class="px-sm py-xs hover:bg-surface-container-low rounded-lg text-xs transition-colors"
+                >
+                  2
+                </button>
+                <button
+                  class="px-sm py-xs hover:bg-surface-container-low rounded-lg text-xs transition-colors"
+                >
+                  3
+                </button>
+                <span class="mx-xs">...</span>
+                <button
+                  class="px-sm py-xs hover:bg-surface-container-low rounded-lg text-xs transition-colors"
+                >
+                  129
+                </button>
+                <button
+                  class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-container-low transition-colors"
+                >
+                  <span class="material-symbols-outlined text-lg"
+                    >chevron_right</span
+                  >
+                </button>
+                <button
+                  class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-container-low transition-colors"
+                >
+                  <span class="material-symbols-outlined text-lg"
+                    >last_page</span
+                  >
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Secondary Management Grid -->
+          <div class="mt-xl grid grid-cols-1 lg:grid-cols-2 gap-xl">
+            <!-- Quick Profile Management -->
+            <div
+              class="bg-surface-container-lowest border border-outline-variant p-lg rounded-xl"
+            >
+              <div class="flex items-center justify-between mb-lg">
+                <div class="flex items-center gap-sm">
+                  <span class="material-symbols-outlined text-secondary"
+                    >admin_panel_settings</span
+                  >
+                  <h3 class="font-headline-md text-headline-md">
+                    Gestión de Perfiles
+                  </h3>
+                </div>
+                <button
+                  class="text-secondary font-semibold text-label-md hover:underline"
+                >
+                  Ver Todos
+                </button>
+              </div>
+              <div class="space-y-md">
+                <div
+                  class="flex items-center justify-between p-md bg-surface-container-low rounded-lg border border-transparent hover:border-outline-variant transition-all cursor-pointer"
+                >
+                  <div class="flex items-center gap-md">
+                    <div
+                      class="w-10 h-10 rounded bg-white flex items-center justify-center border border-outline-variant"
+                    >
+                      <span class="material-symbols-outlined text-secondary"
+                        >security</span
+                      >
+                    </div>
+                    <div>
+                      <p class="font-semibold text-on-surface">
+                        Super Administrador
+                      </p>
+                      <p class="text-xs text-on-surface-variant">
+                        Acceso total al sistema y finanzas
+                      </p>
+                    </div>
+                  </div>
+                  <span class="text-xs font-bold text-on-surface-variant"
+                    >4 Usuarios</span
+                  >
+                </div>
+                <div
+                  class="flex items-center justify-between p-md bg-surface-container-low rounded-lg border border-transparent hover:border-outline-variant transition-all cursor-pointer"
+                >
+                  <div class="flex items-center gap-md">
+                    <div
+                      class="w-10 h-10 rounded bg-white flex items-center justify-center border border-outline-variant"
+                    >
+                      <span class="material-symbols-outlined text-secondary"
+                        >assignment_ind</span
+                      >
+                    </div>
+                    <div>
+                      <p class="font-semibold text-on-surface">
+                        Agente de Ventas
+                      </p>
+                      <p class="text-xs text-on-surface-variant">
+                        Gestión de citas y clientes asignados
+                      </p>
+                    </div>
+                  </div>
+                  <span class="text-xs font-bold text-on-surface-variant"
+                    >18 Usuarios</span
+                  >
+                </div>
+              </div>
+            </div>
+            <!-- Security Log / Recent Activity -->
+            <div
+              class="bg-surface-container-lowest border border-outline-variant p-lg rounded-xl"
+            >
+              <div class="flex items-center justify-between mb-lg">
+                <div class="flex items-center gap-sm">
+                  <span class="material-symbols-outlined text-error"
+                    >policy</span
+                  >
+                  <h3 class="font-headline-md text-headline-md">
+                    Actividad de Seguridad
+                  </h3>
+                </div>
+                <button
+                  class="text-secondary font-semibold text-label-md hover:underline"
+                >
+                  Ver Logs
+                </button>
+              </div>
+              <div class="space-y-sm">
+                <div class="flex gap-md py-xs">
+                  <div class="flex flex-col items-center">
+                    <div class="w-2 h-2 rounded-full bg-error mb-1"></div>
+                    <div class="w-px flex-1 bg-outline-variant"></div>
+                  </div>
+                  <div>
+                    <p class="text-xs text-on-surface-variant font-bold">
+                      Hace 15 min
+                    </p>
+                    <p class="text-on-surface font-body-md">
+                      <span class="font-bold">Intento Fallido</span> de login
+                      desde IP 45.12.33.1 (Rusia)
+                    </p>
+                  </div>
+                </div>
+                <div class="flex gap-md py-xs">
+                  <div class="flex flex-col items-center">
+                    <div class="w-2 h-2 rounded-full bg-secondary mb-1"></div>
+                    <div class="w-px flex-1 bg-outline-variant"></div>
+                  </div>
+                  <div>
+                    <p class="text-xs text-on-surface-variant font-bold">
+                      Hace 1 hora
+                    </p>
+                    <p class="text-on-surface font-body-md">
+                      <span class="font-bold">Nuevo Rol</span> creado:
+                      "Asistente Financiero" por Admin Carlos
+                    </p>
+                  </div>
+                </div>
+                <div class="flex gap-md py-xs">
+                  <div class="flex flex-col items-center">
+                    <div class="w-2 h-2 rounded-full bg-green-500 mb-1"></div>
+                  </div>
+                  <div>
+                    <p class="text-xs text-on-surface-variant font-bold">
+                      Hace 4 horas
+                    </p>
+                    <p class="text-on-surface font-body-md">
+                      <span class="font-bold">Sofía Vergara</span> actualizó sus
+                      credenciales de seguridad
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Footer -->
+        <footer
+          class="mt-auto p-xl border-t border-outline-variant bg-surface-container-low text-center"
+        >
+          <p class="text-on-surface-variant font-label-md">
+            © 2024 AdminPro Enterprise Solutions - Sistema Seguro de Gestión de
+            Usuarios. Todos los derechos reservados.
+          </p>
+        </footer>
+      </main>
+    </div>
+    <!-- Floating Action for Mobile -->
+    <button
+      class="md:hidden fixed bottom-md right-md w-14 h-14 bg-secondary text-on-secondary rounded-full shadow-xl flex items-center justify-center z-50 transition-transform active:scale-90"
+    >
+      <span class="material-symbols-outlined text-2xl">person_add</span>
+    </button>
+    <script>
+      // Micro-interactions and UI Logic
+      document.addEventListener("DOMContentLoaded", () => {
+        // Hover effect for table rows handled by CSS mostly
+
+        // Notification toggle example
+        const notifBtn = document.querySelector(
+          'button .material-symbols-outlined:contains("notifications")',
+        );
+        if (notifBtn) {
+          notifBtn.parentElement.addEventListener("click", () => {
+            alert("No hay notificaciones nuevas en este momento.");
+          });
+        }
+
+        // Simple search filter simulation
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener("input", (e) => {
+          const term = e.target.value.toLowerCase();
+          const rows = document.querySelectorAll(".user-row");
+          rows.forEach((row) => {
+            const text = row.innerText.toLowerCase();
+            row.style.display = text.includes(term) ? "" : "none";
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

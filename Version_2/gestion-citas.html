@@ -1,0 +1,908 @@
+<!doctype html>
+<html class="light" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Gestión de Citas - AdminPro</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface-variant": "#52424c",
+              surface: "#f7f9fb",
+              "on-secondary-fixed-variant": "#54451e",
+              "surface-container-highest": "#e0e3e5",
+              "on-primary": "#ffffff",
+              "tertiary-fixed": "#d3e4fe",
+              "secondary-fixed-dim": "#dbc492",
+              "primary-container": "#f280d5",
+              "error-container": "#ffdad6",
+              "inverse-primary": "#ffade6",
+              "on-primary-fixed-variant": "#7e1a6c",
+              "on-tertiary": "#ffffff",
+              "on-error-container": "#93000a",
+              "primary-fixed": "#ffd7ef",
+              "outline-variant": "#d7c0cd",
+              tertiary: "#505f76",
+              "tertiary-container": "#99a9c2",
+              "on-primary-fixed": "#3a0031",
+              "surface-dim": "#d8dadc",
+              outline: "#85727d",
+              background: "#f7f9fb",
+              "inverse-surface": "#2d3133",
+              "surface-tint": "#9b3586",
+              primary: "#9b3586",
+              "secondary-container": "#f5dda9",
+              "on-surface": "#191c1e",
+              "on-secondary-fixed": "#251a00",
+              "primary-fixed-dim": "#ffade6",
+              secondary: "#6d5c33",
+              "on-error": "#ffffff",
+              "tertiary-fixed-dim": "#b7c8e1",
+              "inverse-on-surface": "#eff1f3",
+              "on-primary-container": "#710b62",
+              "on-background": "#191c1e",
+              "on-secondary": "#ffffff",
+              "surface-container": "#eceef0",
+              "surface-container-low": "#f2f4f6",
+              "surface-container-lowest": "#ffffff",
+              "secondary-fixed": "#f8e0ac",
+              "on-secondary-container": "#726137",
+              error: "#ba1a1a",
+              "surface-container-high": "#e6e8ea",
+              "on-tertiary-container": "#2e3e53",
+              "on-tertiary-fixed": "#0b1c30",
+              "surface-bright": "#f7f9fb",
+              "on-tertiary-fixed-variant": "#38485d",
+              "surface-variant": "#e0e3e5",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              "container-max": "1280px",
+              sm: "12px",
+              lg: "24px",
+              base: "4px",
+              xs: "8px",
+              gutter: "20px",
+              md: "16px",
+              xl: "32px",
+            },
+            fontFamily: {
+              "headline-md": ["Inter"],
+              "body-md": ["Inter"],
+              "body-lg": ["Inter"],
+              "data-table": ["Inter"],
+              display: ["Inter"],
+              "headline-lg": ["Inter"],
+              "headline-lg-mobile": ["Inter"],
+              "label-md": ["Inter"],
+              headline: ["Inter"],
+              body: ["Inter"],
+              label: ["Inter"],
+            },
+            fontSize: {
+              "headline-md": [
+                "20px",
+                { lineHeight: "28px", fontWeight: "600" },
+              ],
+              "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+              "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "data-table": ["13px", { lineHeight: "18px", fontWeight: "500" }],
+              display: [
+                "36px",
+                {
+                  lineHeight: "44px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "headline-lg": [
+                "28px",
+                {
+                  lineHeight: "34px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-lg-mobile": [
+                "24px",
+                { lineHeight: "30px", fontWeight: "600" },
+              ],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "600",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f7f9fb;
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #e2e8f0;
+        border-radius: 10px;
+      }
+      .modal-backdrop {
+        backdrop-filter: blur(4px);
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+    </style>
+  </head>
+  <body class="bg-surface text-on-surface overflow-hidden">
+    <!-- Sidebar Navigation -->
+    <aside
+      class="flex flex-col fixed left-0 top-0 h-full py-lg px-md bg-surface-container-lowest dark:bg-primary-container h-screen w-64 border-r border-outline-variant transition-all duration-200 ease-in-out z-50"
+    >
+      <div class="mb-xl px-xs">
+        <div class="flex items-center gap-sm">
+          <div
+            class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center"
+          >
+            <span class="material-symbols-outlined text-on-primary"
+              >admin_panel_settings</span
+            >
+          </div>
+          <div>
+            <h1
+              class="font-headline-md text-headline-md font-bold text-primary dark:text-on-primary"
+            >
+              AdminPro
+            </h1>
+            <p
+              class="text-on-surface-variant font-label-md text-[10px] uppercase tracking-wider"
+            >
+              Gestión Empresarial
+            </p>
+          </div>
+        </div>
+      </div>
+    
+      <nav class="flex-grow space-y-xs">
+      <nav class="flex-1 space-y-base">
+        <a
+          class="flex items-center gap-md p-md text-on-surface-variant dark:text-on-primary-container hover:bg-surface-container-high dark:hover:bg-primary-fixed-dim transition-colors transition-all duration-200 ease-in-out active:scale-95"
+          href="dashboard.html"
+        >
+          <span class="material-symbols-outlined" data-icon="dashboard"
+            >dashboard</span
+          >
+          <span class="font-body-md text-body-md">Panel Control</span>
+        </a>
+        <!-- Active State: Citas -->
+        <a
+          class="flex items-center gap-md p-md bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary font-semibold rounded-lg transition-all duration-200 ease-in-out active:scale-95"
+          href="gestion-citas.html"
+        >
+          <span class="material-symbols-outlined" data-icon="calendar_month"
+            >calendar_month</span
+          >
+          <span class="font-body-md text-body-md">Citas</span>
+        </a>
+        <a
+          class="flex items-center gap-md p-md text-on-surface-variant dark:text-on-primary-container hover:bg-surface-container-high dark:hover:bg-primary-fixed-dim transition-colors transition-all duration-200 ease-in-out active:scale-95"
+          href="gestion-servicios.html"
+        >
+          <span class="material-symbols-outlined" data-icon="list_alt"
+            >list_alt</span
+          >
+          <span class="font-body-md text-body-md">Servicios</span>
+        </a>
+        <a
+          class="flex items-center gap-md p-md text-on-surface-variant dark:text-on-primary-container hover:bg-surface-container-high dark:hover:bg-primary-fixed-dim transition-colors transition-all duration-200 ease-in-out active:scale-95"
+          href="facturacion-pago.html"
+        >
+          <span class="material-symbols-outlined" data-icon="payments"
+            >payments</span
+          >
+          <span class="font-body-md text-body-md">Facturación</span>
+        </a>
+        <a
+          class="flex items-center gap-md p-md text-on-surface-variant dark:text-on-primary-container hover:bg-surface-container-high dark:hover:bg-primary-fixed-dim transition-colors transition-all duration-200 ease-in-out active:scale-95"
+          href="gestion-usuario.html"
+        >
+          <span class="material-symbols-outlined" data-icon="group">group</span>
+          <span class="font-body-md text-body-md">Usuarios</span>
+        </a>
+      </nav>
+      <div class="mt-auto pt-lg border-t border-outline-variant space-y-xs">
+          <button
+            class="w-full mb-md bg-secondary text-on-secondary py-sm px-md rounded-lg font-semibold flex items-center justify-center gap-xs hover:bg-opacity-90 transition-all active:scale-95"
+          >
+            <span class="material-symbols-outlined">add</span>
+            Nueva Cita
+          </button>
+          <a
+            class="flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg"
+            href="#"
+          >
+            <span class="material-symbols-outlined text-xl">settings</span>
+            <span class="">Configuración</span>
+          </a>
+          <a
+            class="flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg"
+            href="/login"
+            title="Ir a la pantalla de inicio de sesión"
+          >
+            <span class="material-symbols-outlined text-xl text-error"
+              >logout</span
+            >
+            <span class="">Cerrar Sesión</span>
+          </a>
+        </div>
+    </aside>
+    <!-- Main Content Canvas -->
+    <main class="ml-64 min-h-screen flex flex-col">
+      <!-- TopAppBar -->
+      <header
+        class="flex justify-between items-center w-full px-xl sticky top-0 z-40 bg-opacity-95 backdrop-blur-sm bg-surface dark:bg-background h-16 border-b border-outline-variant dark:border-outline"
+      >
+        <div class="flex items-center gap-lg">
+          <div class="relative flex items-center">
+            <span
+              class="material-symbols-outlined absolute left-md text-outline"
+              >search</span
+            >
+            <input
+              class="bg-surface-container-low border-none rounded-full pl-11 pr-md py-xs w-80 text-label-md font-label-md focus:ring-2 focus:ring-secondary/50"
+              placeholder="Buscar citas, clientes..."
+              type="text"
+            />
+          </div>
+        </div>
+        <div class="flex items-center gap-md">
+          <button
+            class="p-xs text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-primary-container rounded-full transition-all"
+          >
+            <span class="material-symbols-outlined" data-icon="notifications"
+              >notifications</span
+            >
+          </button>
+          <button
+            class="p-xs text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-primary-container rounded-full transition-all"
+          >
+            <span class="material-symbols-outlined" data-icon="help_outline"
+              >help_outline</span
+            >
+          </button>
+          <div class="h-8 w-[1px] bg-outline-variant mx-xs"></div>
+          <div
+            class="flex items-center gap-sm cursor-pointer hover:bg-surface-container-low p-xs rounded-lg transition-all"
+          >
+            <div class="text-right hidden sm:block">
+              <p class="font-label-md text-label-md font-bold leading-none">
+                Admin Usuario
+              </p>
+              <p
+                class="text-[10px] text-on-surface-variant uppercase tracking-tighter"
+              >
+                Administrador
+              </p>
+            </div>
+            <img
+              class="w-10 h-10 rounded-full border border-outline-variant object-cover"
+              data-alt="A professional corporate portrait of a business administrator in a modern office setting. High-key soft lighting emphasizes the clean, bright white and corporate blue color palette. The individual is wearing a smart blazer, looking confident and approachable. Minimalist background with subtle glass textures."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuZa_XqZNqLmvUeXtpDcBz0haI9AEBEzj7LbjcMm5rtcVki_8eiQJ2-ymcSyE9jhmJKkZKm6QghZjsnE_u-0RbIbEo-Fm3U3-23QA32cJmOlPqbaeu-JfziukzCntA0DiKnFyW5qNtNNSUBJ--jyB6CzGjwda11yPp4WZyXcG_SN_-FzQ856SC0QYfS021NuaGRg_AKqveRCgHMdDCEXBJlzLPzUWTE8CBnyGpi_jZhh2cpQlaVwx-ObrI60k36dFyqsFaeKnh_Wda"
+            />
+          </div>
+        </div>
+      </header>
+      <!-- Content Body -->
+      <div class="p-xl flex-1 overflow-y-auto custom-scrollbar">
+        <!-- Dashboard Header -->
+        <div class="flex justify-between items-end mb-xl">
+          <div>
+            <h2 class="font-display text-display text-primary">
+              Agenda de Citas
+            </h2>
+            <p class="text-on-surface-variant font-body-lg text-body-lg">
+              Gestiona el flujo de trabajo y la programación de servicios.
+            </p>
+          </div>
+          <div class="flex gap-xs bg-surface-container-high p-base rounded-xl">
+            <button
+              class="px-lg py-xs bg-surface-container-lowest text-primary font-bold rounded-lg shadow-sm"
+            >
+              Mes
+            </button>
+            <button
+              class="px-lg py-xs text-on-surface-variant font-medium hover:bg-surface-container-low rounded-lg transition-all"
+            >
+              Semana
+            </button>
+            <button
+              class="px-lg py-xs text-on-surface-variant font-medium hover:bg-surface-container-low rounded-lg transition-all"
+            >
+              Día
+            </button>
+          </div>
+        </div>
+        <!-- Bento Layout Grid -->
+        <div class="grid grid-cols-12 gap-lg">
+          <!-- Main Calendar View (RF-03) -->
+          <div
+            class="col-span-12 lg:col-span-8 bg-surface-container-lowest border border-outline-variant rounded-xl p-lg"
+          >
+            <div class="flex justify-between items-center mb-lg">
+              <div class="flex items-center gap-md">
+                <h3 class="font-headline-lg text-headline-lg">Octubre 2023</h3>
+                <div class="flex gap-xs">
+                  <button
+                    class="w-8 h-8 flex items-center justify-center border border-outline-variant rounded-lg hover:bg-surface-container-low transition-all"
+                  >
+                    <span class="material-symbols-outlined text-md"
+                      >chevron_left</span
+                    >
+                  </button>
+                  <button
+                    class="w-8 h-8 flex items-center justify-center border border-outline-variant rounded-lg hover:bg-surface-container-low transition-all"
+                  >
+                    <span class="material-symbols-outlined text-md"
+                      >chevron_right</span
+                    >
+                  </button>
+                </div>
+              </div>
+              <button
+                class="flex items-center gap-xs text-secondary font-bold font-label-md text-label-md px-md py-xs border border-secondary rounded-lg hover:bg-secondary/5 transition-all"
+              >
+                <span class="material-symbols-outlined text-sm"
+                  >filter_list</span
+                >
+                Filtrar
+              </button>
+            </div>
+            <div
+              class="calendar-grid text-center border-b border-outline-variant pb-sm mb-sm"
+            >
+              <div
+                class="font-label-md text-label-md text-outline uppercase tracking-widest"
+              >
+                Lun
+              </div>
+              <div
+                class="font-label-md text-label-md text-outline uppercase tracking-widest"
+              >
+                Mar
+              </div>
+              <div
+                class="font-label-md text-label-md text-outline uppercase tracking-widest"
+              >
+                Mié
+              </div>
+              <div
+                class="font-label-md text-label-md text-outline uppercase tracking-widest"
+              >
+                Jue
+              </div>
+              <div
+                class="font-label-md text-label-md text-outline uppercase tracking-widest"
+              >
+                Vie
+              </div>
+              <div
+                class="font-label-md text-label-md text-outline uppercase tracking-widest"
+              >
+                Sáb
+              </div>
+              <div
+                class="font-label-md text-label-md text-outline uppercase tracking-widest"
+              >
+                Dom
+              </div>
+            </div>
+            <div class="calendar-grid gap-sm">
+              <!-- Empty days -->
+              <div
+                class="h-28 bg-surface-container opacity-30 rounded-lg"
+              ></div>
+              <div
+                class="h-28 bg-surface-container opacity-30 rounded-lg"
+              ></div>
+              <!-- Current month days -->
+              <div
+                class="h-28 border border-outline-variant rounded-lg p-xs hover:bg-surface-container-low transition-all cursor-pointer relative"
+              >
+                <span
+                  class="font-label-md text-label-md text-on-surface-variant"
+                  >1</span
+                >
+                <div class="mt-xs space-y-1">
+                  <div
+                    class="text-[10px] bg-secondary/10 text-secondary px-xs py-[2px] rounded border border-secondary/20 truncate"
+                  >
+                    Conf. - Juan Pérez
+                  </div>
+                </div>
+              </div>
+              <div
+                class="h-28 border border-outline-variant rounded-lg p-xs hover:bg-surface-container-low transition-all cursor-pointer relative bg-secondary/5"
+              >
+                <span
+                  class="font-label-md text-label-md text-secondary font-bold"
+                  >2</span
+                >
+                <div class="mt-xs space-y-1">
+                  <div
+                    class="text-[10px] bg-error/10 text-error px-xs py-[2px] rounded border border-error/20 truncate"
+                  >
+                    Canc. - Marta S.
+                  </div>
+                  <div
+                    class="text-[10px] bg-secondary/10 text-secondary px-xs py-[2px] rounded border border-secondary/20 truncate"
+                  >
+                    Conf. - Roberto L.
+                  </div>
+                </div>
+              </div>
+              <div
+                class="h-28 border border-outline-variant rounded-lg p-xs hover:bg-surface-container-low transition-all cursor-pointer relative"
+              >
+                <span
+                  class="font-label-md text-label-md text-on-surface-variant"
+                  >3</span
+                >
+              </div>
+              <div
+                class="h-28 border border-outline-variant rounded-lg p-xs hover:bg-surface-container-low transition-all cursor-pointer relative"
+              >
+                <span
+                  class="font-label-md text-label-md text-on-surface-variant"
+                  >4</span
+                >
+                <div class="mt-xs space-y-1">
+                  <div
+                    class="text-[10px] bg-surface-variant text-on-surface-variant px-xs py-[2px] rounded border border-outline-variant truncate"
+                  >
+                    Pend. - Carla M.
+                  </div>
+                </div>
+              </div>
+              <div
+                class="h-28 border border-outline-variant rounded-lg p-xs hover:bg-surface-container-low transition-all cursor-pointer relative"
+              >
+                <span
+                  class="font-label-md text-label-md text-on-surface-variant"
+                  >5</span
+                >
+              </div>
+              <!-- Row 2 -->
+              <script>
+                for (let i = 6; i <= 12; i++) {
+                  document.write(`
+                                    <div class="h-28 border border-outline-variant rounded-lg p-xs hover:bg-surface-container-low transition-all cursor-pointer relative">
+                                        <span class="font-label-md text-label-md text-on-surface-variant">${i}</span>
+                                        ${i === 10 ? '<div class="mt-xs"><div class="text-[10px] bg-secondary/10 text-secondary px-xs py-[2px] rounded border border-secondary/20 truncate">Conf. - Ana G.</div></div>' : ""}
+                                    </div>
+                                `);
+                }
+              </script>
+              <div
+                class="h-28 border border-outline-variant rounded-lg p-xs hover:bg-surface-container-low transition-all cursor-pointer relative"
+              >
+                <span
+                  class="font-label-md text-label-md text-on-surface-variant"
+                  >6</span
+                >
+              </div>
+
+              <div
+                class="h-28 border border-outline-variant rounded-lg p-xs hover:bg-surface-container-low transition-all cursor-pointer relative"
+              >
+                <span
+                  class="font-label-md text-label-md text-on-surface-variant"
+                  >7</span
+                >
+              </div>
+
+              <div
+                class="h-28 border border-outline-variant rounded-lg p-xs hover:bg-surface-container-low transition-all cursor-pointer relative"
+              >
+                <span
+                  class="font-label-md text-label-md text-on-surface-variant"
+                  >8</span
+                >
+              </div>
+
+              <div
+                class="h-28 border border-outline-variant rounded-lg p-xs hover:bg-surface-container-low transition-all cursor-pointer relative"
+              >
+                <span
+                  class="font-label-md text-label-md text-on-surface-variant"
+                  >9</span
+                >
+              </div>
+
+              <div
+                class="h-28 border border-outline-variant rounded-lg p-xs hover:bg-surface-container-low transition-all cursor-pointer relative"
+              >
+                <span
+                  class="font-label-md text-label-md text-on-surface-variant"
+                  >10</span
+                >
+                <div class="mt-xs">
+                  <div
+                    class="text-[10px] bg-secondary/10 text-secondary px-xs py-[2px] rounded border border-secondary/20 truncate"
+                  >
+                    Conf. - Ana G.
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="h-28 border border-outline-variant rounded-lg p-xs hover:bg-surface-container-low transition-all cursor-pointer relative"
+              >
+                <span
+                  class="font-label-md text-label-md text-on-surface-variant"
+                  >11</span
+                >
+              </div>
+
+              <div
+                class="h-28 border border-outline-variant rounded-lg p-xs hover:bg-surface-container-low transition-all cursor-pointer relative"
+              >
+                <span
+                  class="font-label-md text-label-md text-on-surface-variant"
+                  >12</span
+                >
+              </div>
+            </div>
+          </div>
+          <!-- Upcoming Appointments List (RF-04) -->
+          <div class="col-span-12 lg:col-span-4 space-y-lg">
+            <div
+              class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg h-full flex flex-col"
+            >
+              <h3 class="font-headline-md text-headline-md mb-lg">
+                Próximas Citas
+              </h3>
+              <div
+                class="space-y-md flex-1 overflow-y-auto pr-xs custom-scrollbar"
+              >
+                <!-- Appointment Card 1 -->
+                <div
+                  class="p-md border border-outline-variant rounded-lg hover:border-secondary transition-all group"
+                >
+                  <div class="flex justify-between items-start mb-sm">
+                    <div>
+                      <p
+                        class="font-label-md text-label-md text-secondary font-bold"
+                      >
+                        14:30 - Hoy
+                      </p>
+                      <h4 class="font-headline-md text-headline-md !text-md">
+                        Juan Carlos Pérez
+                      </h4>
+                    </div>
+                    <span
+                      class="bg-emerald-100 text-emerald-700 text-[10px] font-bold px-sm py-[2px] rounded-full"
+                      >Confirmada</span
+                    >
+                  </div>
+                  <div
+                    class="flex items-center gap-xs text-on-surface-variant mb-md"
+                  >
+                    <span class="material-symbols-outlined text-sm"
+                      >design_services</span
+                    >
+                    <span class="text-body-md font-body-md"
+                      >Consultoría Estratégica</span
+                    >
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <div class="flex -space-x-2">
+                      <img
+                        class="w-6 h-6 rounded-full border border-surface-container-lowest"
+                        data-alt="Close up of a professional document with a stylish pen resting on top, shallow depth of field. Corporate office setting."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3sjmAiVIWc8OvRDA-ZVm894GZVAgV8djMlbuA7ZXK_ycgZK7X6UPI3tf1kKIf3Vcx07_V-hDO94lEiKFR2DyVUHNjhUnFOfFM1Q-nH9MTuyBVdBPnCkuefpH3Ig49Q8Xn0F8m80n_1Rut9DFolscZbhlNm-zsATRRLXe1OKKgN8-zeeGstqtYj2ElAp5zlw-JaCyQYXsZBmZ3LgrZObap-GoGLdXsmIpN-oDYHWxeO2BLlAn1k2Nv_GATjHj9zM8WVEjSMpmuacYi"
+                      />
+                      <div
+                        class="w-6 h-6 rounded-full bg-surface-container-high border border-surface-container-lowest flex items-center justify-center text-[10px] font-bold"
+                      >
+                        +1
+                      </div>
+                    </div>
+                    <button
+                      class="text-secondary opacity-0 group-hover:opacity-100 transition-all"
+                    >
+                      <span class="material-symbols-outlined">more_horiz</span>
+                    </button>
+                  </div>
+                </div>
+                <!-- Appointment Card 2 -->
+                <div
+                  class="p-md border border-outline-variant rounded-lg hover:border-secondary transition-all group"
+                >
+                  <div class="flex justify-between items-start mb-sm">
+                    <div>
+                      <p
+                        class="font-label-md text-label-md text-on-surface-variant font-bold"
+                      >
+                        09:00 - Mañana
+                      </p>
+                      <h4 class="font-headline-md text-headline-md !text-md">
+                        Marta Rodríguez
+                      </h4>
+                    </div>
+                    <span
+                      class="bg-amber-100 text-amber-700 text-[10px] font-bold px-sm py-[2px] rounded-full"
+                      >Pendiente</span
+                    >
+                  </div>
+                  <div
+                    class="flex items-center gap-xs text-on-surface-variant mb-md"
+                  >
+                    <span class="material-symbols-outlined text-sm"
+                      >settings</span
+                    >
+                    <span class="text-body-md font-body-md"
+                      >Mantenimiento Sistemas</span
+                    >
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="text-[10px] text-on-surface-variant"
+                      >Enviado recordatorio</span
+                    >
+                    <button
+                      class="text-secondary opacity-0 group-hover:opacity-100 transition-all"
+                    >
+                      <span class="material-symbols-outlined">more_horiz</span>
+                    </button>
+                  </div>
+                </div>
+                <!-- Appointment Card 3 -->
+                <div
+                  class="p-md border border-outline-variant rounded-lg hover:border-secondary transition-all group opacity-60"
+                >
+                  <div class="flex justify-between items-start mb-sm">
+                    <div>
+                      <p
+                        class="font-label-md text-label-md text-on-surface-variant font-bold"
+                      >
+                        11:15 - 05 Oct
+                      </p>
+                      <h4 class="font-headline-md text-headline-md !text-md">
+                        Carlos Alberto Gil
+                      </h4>
+                    </div>
+                    <span
+                      class="bg-rose-100 text-rose-700 text-[10px] font-bold px-sm py-[2px] rounded-full"
+                      >Cancelada</span
+                    >
+                  </div>
+                  <div
+                    class="flex items-center gap-xs text-on-surface-variant mb-md text-decoration-line-through"
+                  >
+                    <span class="material-symbols-outlined text-sm"
+                      >support_agent</span
+                    >
+                    <span class="text-body-md font-body-md"
+                      >Auditoría Fiscal</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <button
+                class="w-full mt-lg py-md border border-outline-variant rounded-lg text-on-surface-variant font-bold font-label-md hover:bg-surface-container-low transition-all"
+              >
+                Ver historial completo
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- New Appointment Modal (RF-03/04 UI Pattern) -->
+    <div
+      class="fixed inset-0 z-[100] hidden flex items-center justify-center p-md"
+      id="appointmentModal"
+    >
+      <div class="modal-backdrop absolute inset-0" onclick="closeModal()"></div>
+      <div
+        class="bg-surface-container-lowest w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden relative z-10 transform transition-all scale-95 opacity-0 duration-300"
+        id="modalContainer"
+      >
+        <div
+          class="p-lg border-b border-outline-variant flex justify-between items-center bg-surface-container-low"
+        >
+          <div>
+            <h3 class="font-headline-lg text-headline-lg text-primary">
+              Nueva Cita
+            </h3>
+            <p class="text-on-surface-variant font-label-md text-label-md">
+              Programar nuevo registro de servicio
+            </p>
+          </div>
+          <button
+            class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high transition-all"
+            onclick="closeModal()"
+          >
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <form
+          class="p-lg space-y-lg"
+          onsubmit="
+            event.preventDefault();
+            closeModal();
+          "
+        >
+          <!-- Client Selection -->
+          <div>
+            <label
+              class="block font-label-md text-label-md text-on-surface-variant mb-xs"
+              >CLIENTE</label
+            >
+            <div class="relative">
+              <span
+                class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline"
+                >person</span
+              >
+              <select
+                class="w-full pl-11 pr-md py-md bg-surface-container-lowest border border-outline-variant rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition-all"
+              >
+                <option>Seleccionar cliente...</option>
+                <option>Juan Pérez</option>
+                <option>Marta Rodríguez</option>
+                <option>Carlos Alberto Gil</option>
+                <option>+ Añadir nuevo cliente</option>
+              </select>
+            </div>
+          </div>
+          <!-- Service Selection -->
+          <div>
+            <label
+              class="block font-label-md text-label-md text-on-surface-variant mb-xs"
+              >SERVICIO</label
+            >
+            <div class="relative">
+              <span
+                class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline"
+                >category</span
+              >
+              <select
+                class="w-full pl-11 pr-md py-md bg-surface-container-lowest border border-outline-variant rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition-all"
+              >
+                <option>Consultoría Estratégica (60 min)</option>
+                <option>Mantenimiento Sistemas (120 min)</option>
+                <option>Auditoría Fiscal (180 min)</option>
+                <option>Soporte Técnico (30 min)</option>
+              </select>
+            </div>
+          </div>
+          <!-- Date & Time -->
+          <div class="grid grid-cols-2 gap-md">
+            <div>
+              <label
+                class="block font-label-md text-label-md text-on-surface-variant mb-xs"
+                >FECHA</label
+              >
+              <div class="relative">
+                <span
+                  class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline"
+                  >calendar_today</span
+                >
+                <input
+                  class="w-full pl-11 pr-md py-md bg-surface-container-lowest border border-outline-variant rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary"
+                  type="date"
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                class="block font-label-md text-label-md text-on-surface-variant mb-xs"
+                >HORA</label
+              >
+              <div class="relative">
+                <span
+                  class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline"
+                  >schedule</span
+                >
+                <input
+                  class="w-full pl-11 pr-md py-md bg-surface-container-lowest border border-outline-variant rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary"
+                  type="time"
+                />
+              </div>
+            </div>
+          </div>
+          <!-- Notes -->
+          <div>
+            <label
+              class="block font-label-md text-label-md text-on-surface-variant mb-xs"
+              >NOTAS ADICIONALES (OPCIONAL)</label
+            >
+            <textarea
+              class="w-full p-md bg-surface-container-lowest border border-outline-variant rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary h-24 resize-none"
+              placeholder="Detalles específicos del requerimiento..."
+            ></textarea>
+          </div>
+          <div class="flex gap-md pt-lg">
+            <button
+              class="flex-1 py-md text-on-surface-variant font-bold border border-outline-variant rounded-lg hover:bg-surface-container-low transition-all"
+              onclick="closeModal()"
+              type="button"
+            >
+              Cancelar
+            </button>
+            <button
+              class="flex-2 w-full bg-secondary text-on-secondary py-md font-bold rounded-lg shadow-lg hover:brightness-95 active:scale-[0.98] transition-all"
+              type="submit"
+            >
+              Confirmar y Programar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script>
+      function openModal() {
+        const modal = document.getElementById("appointmentModal");
+        const container = document.getElementById("modalContainer");
+        modal.classList.remove("hidden");
+        setTimeout(() => {
+          container.classList.remove("scale-95", "opacity-0");
+          container.classList.add("scale-100", "opacity-100");
+        }, 10);
+      }
+
+      function closeModal() {
+        const modal = document.getElementById("appointmentModal");
+        const container = document.getElementById("modalContainer");
+        container.classList.add("scale-95", "opacity-0");
+        container.classList.remove("scale-100", "opacity-100");
+        setTimeout(() => {
+          modal.classList.add("hidden");
+        }, 300);
+      }
+
+      // Handle Escape key
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeModal();
+      });
+    </script>
+  </body>
+</html>
